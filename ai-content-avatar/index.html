@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <!-- SEO Metadata -->
+  <title>AI Content Avatar Studio | BlankDigi</title>
+  <meta name="description" content="Choose an AI avatar world for your brand. BlankDigi builds scripts, visuals, captions, approvals, and weekly content systems around your avatar." />
+  <link rel="canonical" href="https://blankdigi.com/ai-content-avatar/" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://blankdigi.com/ai-content-avatar/" />
+  <meta property="og:title" content="AI Content Avatar Studio | BlankDigi" />
+  <meta property="og:description" content="Pick your avatar world. BlankDigi builds the content system around it." />
+  <meta property="og:image" content="https://blankdigi.com/assets/images/avatar-worlds/blankdigi-avatar-preview.jpg" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="avatar-worlds.css" />
+</head>
+<body>
+  <div class="page">
+    
+    <!-- Navbar / Header -->
+    <header>
+      <div class="logo">
+        <a href="https://blankdigi.com/">
+          <svg class="logo-icon" width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="2" y="6" width="6" height="20" rx="3" fill="url(#logoGrad1)" />
+            <circle cx="16" cy="10" r="3.5" fill="#00d4ff" />
+            <circle cx="26" cy="16" r="3.5" fill="#b84cff" />
+            <circle cx="16" cy="22" r="3.5" fill="#00d4ff" />
+            <path d="M8 10h5M8 16h15M8 22h5" stroke="rgba(255, 255, 255, 0.4)" stroke-width="2" stroke-linecap="round" />
+            <path d="M16 10l7 6-7 6" stroke="rgba(255, 255, 255, 0.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            <defs>
+              <linearGradient id="logoGrad1" x1="0" y1="6" x2="0" y2="26" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#00d4ff" />
+                <stop offset="1" stop-color="#b84cff" />
+              </linearGradient>
+            </defs>
+          </svg>
+          Blank<span>Digi</span>
+        </a>
+        <span class="status-badge"><span class="pulse-dot"></span>AI Studio Online</span>
+      </div>
+      
+      <nav class="nav-links" id="navLinks">
+        <div class="nav-indicator" id="navIndicator"></div>
+        <a href="https://blankdigi.com/#services" data-i18n="navServices">Services</a>
+        <a href="https://blankdigi.com/#ai-agents" data-i18n="navAiAgents">AI Agents</a>
+        <a href="https://blankdigi.com/#built" data-i18n="navBuilt">Built</a>
+        <a href="#worlds" data-i18n="navAvatarStudio">Avatar Studio</a>
+        <a href="https://blankdigi.com/#about" data-i18n="navAbout">About</a>
+        <button class="btn-nav-audit mobile-only-btn" onclick="openAudit()" data-i18n="navFreeAudit">Free Audit</button>
+      </nav>
+
+      <div class="header-right">
+        <div class="controls-pill">
+          <div class="sound-toggle active" id="soundToggle" onclick="toggleSound()" title="Toggle SFX">
+            <svg class="sound-on-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            </svg>
+            <svg class="sound-off-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+              <line x1="23" y1="9" x2="17" y2="15"></line>
+              <line x1="17" y1="9" x2="23" y2="15"></line>
+            </svg>
+          </div>
+          <span class="controls-divider"></span>
+          <div class="theme-switch" onclick="toggleTheme()" title="Toggle Theme">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          </div>
+          <span class="controls-divider"></span>
+          <div class="lang-switch">
+            <button class="active" onclick="setLang('en', this)">EN</button>
+            <button onclick="setLang('fr', this)">FR</button>
+          </div>
+        </div>
+        
+        <button class="btn-nav-audit" onclick="openAudit()" data-i18n="navFreeAudit">Free Audit</button>
+        
+        <button class="hamburger-menu" id="hamburgerMenu" onclick="toggleMobileMenu()" aria-label="Toggle Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      
+      <!-- Hero Section -->
+      <section class="hero">
+        <div class="hero-container">
+          <div>
+            <div class="badge" data-i18n="heroBadge">AI Content Avatar Studio</div>
+            <h1 data-i18n="heroTitle">Choose the AI avatar world for your brand.</h1>
+            <p data-i18n="heroText">
+              BlankDigi builds weekly content systems for businesses that want to show up without recording every day. Pick your avatar style, and we build the scripts, visuals, captions, approvals, and publishing workflow around it.
+            </p>
+            <div class="cta-row">
+              <button class="btn btn-primary" onclick="scrollToWorlds()" data-i18n="exploreBtn">Explore Avatar Worlds</button>
+              <button class="btn btn-secondary" onclick="openAudit()" data-i18n="auditBtn">Start BlankDigi Avatar Audit</button>
+            </div>
+          </div>
+          <div class="hero-visual">
+          <div class="avatar-stack">
+            
+            <!-- Animated SVG Network lines connecting the nodes -->
+            <svg class="avatar-net-lines" width="320" height="320" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; inset: 0; pointer-events: none; z-index: 0;">
+              <!-- Line from main (160, 160) to small-one (270, 55) -->
+              <path d="M160 160 L270 55" stroke="rgba(0, 212, 255, 0.45)" stroke-width="1.5" stroke-dasharray="8 6" class="pulse-line-1" />
+              <!-- Line from main (160, 160) to small-two (45, 260) -->
+              <path d="M160 160 L45 260" stroke="rgba(184, 76, 255, 0.45)" stroke-width="1.5" stroke-dasharray="8 6" class="pulse-line-2" />
+              <!-- Background thin connection between small nodes -->
+              <path d="M270 55 L45 260" stroke="rgba(255, 255, 255, 0.12)" stroke-width="1" stroke-dasharray="4 4" />
+            </svg>
+
+            <!-- HUD Orbit Rings -->
+            <div class="hud-ring main-ring"></div>
+            <div class="hud-ring ring-one"></div>
+            <div class="hud-ring ring-two"></div>
+            
+            <!-- Coords Scanner -->
+            <div class="hud-coords" id="hudCoords">LOC: X.00 Y.00</div>
+
+            <!-- Main Avatar Node (Hexagon) -->
+            <div class="avatar-main">
+              <div class="avatar-inner">
+                <div class="scanner-line"></div>
+                <img src="../assets/images/avatar-worlds/blankdigi-avatar-preview.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div style="display:none; width:100%; height:100%; place-items:center; font-size:42px; font-weight:900; background:linear-gradient(135deg, #2b1740, #062c3a); color:white;">AI</div>
+              </div>
+            </div>
+            <div class="avatar-label main-label" data-i18n="heroLabel1">BlankDigi Avatar</div>
+
+            <!-- Small Avatar One Node (Hexagon) -->
+            <div class="avatar-small one">
+              <div class="avatar-inner">
+                <div class="scanner-line"></div>
+                <img src="../assets/images/avatar-worlds/warm-founder.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div style="display:none; width:100%; height:100%; place-items:center; font-size:24px; font-weight:900; background:linear-gradient(135deg, #3a2506, #b95a00); color:white;">WF</div>
+              </div>
+            </div>
+            <div class="avatar-label label-one" data-i18n="heroLabel2">Warm Founder</div>
+
+            <!-- Small Avatar Two Node (Hexagon) -->
+            <div class="avatar-small two">
+              <div class="avatar-inner">
+                <div class="scanner-line"></div>
+                <img src="../assets/images/avatar-worlds/stylish-creator.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div style="display:none; width:100%; height:100%; place-items:center; font-size:24px; font-weight:900; background:linear-gradient(135deg, #111, #6c2cff); color:white;">SC</div>
+              </div>
+            </div>
+            <div class="avatar-label label-two" data-i18n="heroLabel3">Stylish Creator</div>
+          </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Problem / Positioning Section -->
+      <section>
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="problemTitle">Not just an avatar. A content identity.</h2>
+          </div>
+          <div>
+            <p data-i18n="problemText">
+              Every business needs a different face, tone, and world. A fashion brand should not look like a real estate brand, and a coach should not sound like a product seller.
+            </p>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="step">
+            <strong>01</strong>
+            <h3 data-i18n="step1Title">Choose the world</h3>
+            <p data-i18n="step1Text">Pick the visual style that fits your brand personality.</p>
+          </div>
+          <div class="step">
+            <strong>02</strong>
+            <h3 data-i18n="step2Title">Define the tone</h3>
+            <p data-i18n="step2Text">Warm, funny, stylish, serious, luxury, or expert.</p>
+          </div>
+          <div class="step">
+            <strong>03</strong>
+            <h3 data-i18n="step3Title">Build the content</h3>
+            <p data-i18n="step3Text">Scripts, hooks, captions, visuals, and platform versions.</p>
+          </div>
+          <div class="step">
+            <strong>04</strong>
+            <h3 data-i18n="step4Title">Approve & publish</h3>
+            <p data-i18n="step4Text">You approve the direction before content goes live.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Avatar Worlds Explorer Section -->
+      <section id="worlds">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="worldsTitle">Explore Avatar Worlds</h2>
+          </div>
+          <div>
+            <p data-i18n="worldsText">
+              Each world is built for a specific business type, audience, and content goal.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Filters -->
+        <div class="filters">
+          <button class="filter active" onclick="filterWorlds('all', this)" data-i18n="filterAll">🌐 All</button>
+          <button class="filter" onclick="filterWorlds('corporate', this)" data-i18n="filterCorporate">💼 Corporate & Finance</button>
+          <button class="filter" onclick="filterWorlds('fashion', this)" data-i18n="filterFashion">💎 Fashion & Luxury</button>
+          <button class="filter" onclick="filterWorlds('health', this)" data-i18n="filterHealth">⚡ Health & Fitness</button>
+          <button class="filter" onclick="filterWorlds('education', this)" data-i18n="filterEducation">📚 Education & Info</button>
+          <button class="filter" onclick="filterWorlds('media', this)" data-i18n="filterMedia">🎬 Lifestyle & Media</button>
+          <button class="filter" onclick="filterWorlds('commerce', this)" data-i18n="filterCommerce">🛍️ Commerce & Local</button>
+        </div>
+
+        <!-- Worlds Grid -->
+        <div class="worlds-grid" id="worldsGrid">
+          <!-- Dynamic rendering via avatar-worlds.js -->
+        </div>
+      </section>
+
+      <!-- BlankDigi Universe Section -->
+      <section id="universe">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="universeTitle">BlankDigi Universe</h2>
+          </div>
+          <div>
+            <p data-i18n="universeText">
+              An immersive universe where creativity, technology, and style meet. 4 entities, 1 single objective: build the future together.
+            </p>
+          </div>
+        </div>
+
+        <!-- Universe Interactive Tabs -->
+        <div class="universe-tabs">
+          <button class="uni-tab active" onclick="switchUniverseTab('crew', this)">👥 <span data-i18n="uniTabCrew">The Crew</span></button>
+          <button class="uni-tab" onclick="switchUniverseTab('worlds', this)">🌌 <span data-i18n="uniTabWorlds">The Worlds</span></button>
+          <button class="uni-tab" onclick="switchUniverseTab('series', this)">🎬 <span data-i18n="uniTabSeries">The Series</span></button>
+          <button class="uni-tab" onclick="switchUniverseTab('values', this)">📜 <span data-i18n="uniTabValues">Mission & Values</span></button>
+        </div>
+
+        <!-- Tab Content: The Crew -->
+        <div class="universe-tab-content active" id="uni-crew">
+          <div class="crew-grid">
+            
+            <!-- Crew 1: Vous (The Founder) -->
+            <div class="crew-card" id="crew-card-founder">
+              <div class="crew-image-wrapper">
+                <img src="../assets/images/avatar-worlds/crew-founder.png" alt="The Founder" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="crew-fallback-img" style="background: linear-gradient(135deg, #111, #444); display:none; place-items:center; width:100%; height:100%; font-size:42px; font-weight:900;">FO</div>
+              </div>
+              <div class="crew-info">
+                <span class="crew-badge" data-i18n="crewFounderBadge">You</span>
+                <h3 data-i18n="crewFounderName">The Founder</h3>
+                <p data-i18n="crewFounderDesc">Vision. Strategy. Leadership. He connects the real to the virtual and makes the right decisions.</p>
+                
+                <div class="crew-stats">
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valStrategy">Strategy</span>
+                    <span class="stat-val" id="stat-val-founder-1">95%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-founder-1" style="--w: 95%; background: var(--accent2);"></div></div>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valLeadership">Leadership</span>
+                    <span class="stat-val" id="stat-val-founder-2">98%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-founder-2" style="--w: 98%; background: var(--accent2);"></div></div>
+                  </div>
+                </div>
+                <div class="crew-actions-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px;">
+                  <button class="crew-btn" style="margin-top: 0;" onclick="openAuditWithStyle('The Founder')" data-i18n="crewBtnFounder">Request Strategy Audit</button>
+                  <button class="crew-btn sync-btn" style="margin-top: 0; border-color: rgba(0, 212, 255, 0.4); background: rgba(0, 212, 255, 0.05);" onclick="syncCrewCore('founder', this)" data-i18n="syncCoreBtn">⚡ Sync Core</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Crew 2: BlankDigi -->
+            <div class="crew-card" id="crew-card-blankdigi">
+              <div class="crew-image-wrapper">
+                <img src="../assets/images/avatar-worlds/crew-blankdigi.png" alt="BlankDigi" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="crew-fallback-img" style="background: linear-gradient(135deg, #090915, #00d4ff); display:none; place-items:center; width:100%; height:100%; font-size:42px; font-weight:900;">BD</div>
+              </div>
+              <div class="crew-info">
+                <span class="crew-badge" style="background: rgba(0, 212, 255, 0.1); border-color: rgba(0, 212, 255, 0.3); color: var(--accent2);" data-i18n="crewBlankDigiBadge">The Brain</span>
+                <h3 data-i18n="crewBlankDigiName">BlankDigi</h3>
+                <p data-i18n="crewBlankDigiDesc">Advanced AI. Code. Systems. He builds what others imagine. Cold but loyal.</p>
+                
+                <div class="crew-stats">
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valAdvancedAI">Advanced AI</span>
+                    <span class="stat-val" id="stat-val-blankdigi-1">99%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-blankdigi-1" style="--w: 99%; background: var(--accent2);"></div></div>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valCodeLogic">Code Logic</span>
+                    <span class="stat-val" id="stat-val-blankdigi-2">98%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-blankdigi-2" style="--w: 98%; background: var(--accent2);"></div></div>
+                  </div>
+                </div>
+                <div class="crew-actions-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px;">
+                  <button class="crew-btn" style="margin-top: 0;" onclick="openAuditWithStyle('BlankDigi')" data-i18n="crewBtnBlankDigi">Inspect System Specs</button>
+                  <button class="crew-btn sync-btn" style="margin-top: 0; border-color: rgba(0, 212, 255, 0.4); background: rgba(0, 212, 255, 0.05);" onclick="syncCrewCore('blankdigi', this)" data-i18n="syncCoreBtn">⚡ Sync Core</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Crew 3: Poposs -->
+            <div class="crew-card" id="crew-card-poposs">
+              <div class="crew-image-wrapper">
+                <img src="../assets/images/avatar-worlds/crew-poposs.png" alt="Poposs" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="crew-fallback-img" style="background: linear-gradient(135deg, #0f1c09, #39b54a); display:none; place-items:center; width:100%; height:100%; font-size:42px; font-weight:900;">PP</div>
+              </div>
+              <div class="crew-info">
+                <span class="crew-badge" style="background: rgba(57, 181, 74, 0.1); border-color: rgba(57, 181, 74, 0.3); color: #39b54a;" data-i18n="crewPopossBadge">The Vibe</span>
+                <h3 data-i18n="crewPopossName">Poposs</h3>
+                <p data-i18n="crewPopossDesc">Funny. Chaotic. Always creates the moment. Heart of gold.</p>
+                
+                <div class="crew-stats">
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valViralVibe">Viral Vibe</span>
+                    <span class="stat-val" id="stat-val-poposs-1">98%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-poposs-1" style="--w: 98%; background: #39b54a;"></div></div>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valHumorChaos">Humor & Chaos</span>
+                    <span class="stat-val" id="stat-val-poposs-2">99%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-poposs-2" style="--w: 99%; background: #39b54a;"></div></div>
+                  </div>
+                </div>
+                <div class="crew-actions-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px;">
+                  <button class="crew-btn" style="margin-top: 0;" onclick="openAuditWithStyle('Poposs')" data-i18n="crewBtnPoposs">Unlock Viral Vibe</button>
+                  <button class="crew-btn sync-btn" style="margin-top: 0; border-color: rgba(0, 212, 255, 0.4); background: rgba(0, 212, 255, 0.05);" onclick="syncCrewCore('poposs', this)" data-i18n="syncCoreBtn">⚡ Sync Core</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Crew 4: Follovida -->
+            <div class="crew-card" id="crew-card-follovida">
+              <div class="crew-image-wrapper">
+                <img src="../assets/images/avatar-worlds/crew-follovida.png" alt="Follovida" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="crew-fallback-img" style="background: linear-gradient(135deg, #1c0a24, #b84cff); display:none; place-items:center; width:100%; height:100%; font-size:42px; font-weight:900;">FV</div>
+              </div>
+              <div class="crew-info">
+                <span class="crew-badge" style="background: rgba(184, 76, 255, 0.1); border-color: rgba(184, 76, 255, 0.3); color: var(--accent);" data-i18n="crewFollovidaBadge">The Style</span>
+                <h3 data-i18n="crewFollovidaName">Follovida</h3>
+                <p data-i18n="crewFollovidaDesc">Elegance. Power. Immersive augmented fashion universe, smart & premium boutique.</p>
+                
+                <div class="crew-stats">
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valStyleHype">Style Hype</span>
+                    <span class="stat-val" id="stat-val-follovida-1">99%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-follovida-1" style="--w: 99%; background: var(--accent);"></div></div>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valElegance">Elegance</span>
+                    <span class="stat-val" id="stat-val-follovida-2">95%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-follovida-2" style="--w: 95%; background: var(--accent);"></div></div>
+                  </div>
+                </div>
+                <div class="crew-actions-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px;">
+                  <button class="crew-btn" style="margin-top: 0;" onclick="openAuditWithStyle('Follovida')" data-i18n="crewBtnFollovida">Explore Fashion World</button>
+                  <button class="crew-btn sync-btn" style="margin-top: 0; border-color: rgba(0, 212, 255, 0.4); background: rgba(0, 212, 255, 0.05);" onclick="syncCrewCore('follovida', this)" data-i18n="syncCoreBtn">⚡ Sync Core</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Crew 5: Pixel-Patch -->
+            <div class="crew-card" id="crew-card-pixelpatch">
+              <div class="crew-image-wrapper">
+                <img src="../assets/images/avatar-worlds/crew-pixelpatch.png" alt="Pixel-Patch" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="crew-fallback-img" style="background: linear-gradient(135deg, #10061a, #6c3082); display:none; place-items:center; width:100%; height:100%; font-size:42px; font-weight:900;">PP</div>
+              </div>
+              <div class="crew-info">
+                <span class="crew-badge" style="background: rgba(108, 48, 130, 0.1); border-color: rgba(108, 48, 130, 0.3); color: #db7093;" data-i18n="crewPixelPatchBadge">The Visuals</span>
+                <h3 data-i18n="crewPixelPatchName">Pixel-Patch</h3>
+                <p data-i18n="crewPixelPatchDesc">Interactive art. Holograms. Layouts. She paints the digital sky and designs immersive interfaces.</p>
+                
+                <div class="crew-stats">
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valUiDesign">UI Design</span>
+                    <span class="stat-val" id="stat-val-pixelpatch-1">98%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-pixelpatch-1" style="--w: 98%; background: #db7093;"></div></div>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valHolography">Holography</span>
+                    <span class="stat-val" id="stat-val-pixelpatch-2">95%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-pixelpatch-2" style="--w: 95%; background: #db7093;"></div></div>
+                  </div>
+                </div>
+                <div class="crew-actions-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px;">
+                  <button class="crew-btn" style="margin-top: 0;" onclick="openAuditWithStyle('Pixel-Patch')" data-i18n="crewBtnPixelPatch">View Styleguide</button>
+                  <button class="crew-btn sync-btn" style="margin-top: 0; border-color: rgba(0, 212, 255, 0.4); background: rgba(0, 212, 255, 0.05);" onclick="syncCrewCore('pixelpatch', this)" data-i18n="syncCoreBtn">⚡ Sync Core</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Crew 6: Follo-Drive -->
+            <div class="crew-card" id="crew-card-follodrive">
+              <div class="crew-image-wrapper">
+                <img src="../assets/images/avatar-worlds/crew-follodrive.png" alt="Follo-Drive" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="crew-fallback-img" style="background: linear-gradient(135deg, #1f0f04, #fb5607); display:none; place-items:center; width:100%; height:100%; font-size:42px; font-weight:900;">FD</div>
+              </div>
+              <div class="crew-info">
+                <span class="crew-badge" style="background: rgba(251, 86, 7, 0.1); border-color: rgba(251, 86, 7, 0.3); color: #fb5607;" data-i18n="crewFolloDriveBadge">The Pilot</span>
+                <h3 data-i18n="crewFolloDriveName">Follo-Drive</h3>
+                <p data-i18n="crewFolloDriveDesc">Navigation. Drones. Speed. He controls the Robo-Taxi networks and solves urban gridlocks.</p>
+                
+                <div class="crew-stats">
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valNavigation">Navigation</span>
+                    <span class="stat-val" id="stat-val-follodrive-1">96%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-follodrive-1" style="--w: 96%; background: #fb5607;"></div></div>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valSpeed">Speed</span>
+                    <span class="stat-val" id="stat-val-follodrive-2">99%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-follodrive-2" style="--w: 99%; background: #fb5607;"></div></div>
+                  </div>
+                </div>
+                <div class="crew-actions-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px;">
+                  <button class="crew-btn" style="margin-top: 0;" onclick="openAuditWithStyle('Follo-Drive')" data-i18n="crewBtnFolloDrive">Trace Route</button>
+                  <button class="crew-btn sync-btn" style="margin-top: 0; border-color: rgba(0, 212, 255, 0.4); background: rgba(0, 212, 255, 0.05);" onclick="syncCrewCore('follodrive', this)" data-i18n="syncCoreBtn">⚡ Sync Core</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Crew 7: Vibe-Vortex -->
+            <div class="crew-card" id="crew-card-vibevortex">
+              <div class="crew-image-wrapper">
+                <img src="../assets/images/avatar-worlds/crew-vibevortex.png" alt="Vibe-Vortex" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="crew-fallback-img" style="background: linear-gradient(135deg, #1a031e, #ff007f); display:none; place-items:center; width:100%; height:100%; font-size:42px; font-weight:900;">VV</div>
+              </div>
+              <div class="crew-info">
+                <span class="crew-badge" style="background: rgba(255, 0, 127, 0.1); border-color: rgba(255, 0, 127, 0.3); color: #ff007f;" data-i18n="crewVibeVortexBadge">The Agent</span>
+                <h3 data-i18n="crewVibeVortexName">Vibe-Vortex</h3>
+                <p data-i18n="crewVibeVortexDesc">Trends. Sentiment Analysis. Viral Loops. She scans the social network nodes and predicts the next hype.</p>
+                
+                <div class="crew-stats">
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valTrendScan">Trend Scan</span>
+                    <span class="stat-val" id="stat-val-vibevortex-1">97%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-vibevortex-1" style="--w: 97%; background: #ff007f;"></div></div>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valSentimentAI">Sentiment AI</span>
+                    <span class="stat-val" id="stat-val-vibevortex-2">96%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-vibevortex-2" style="--w: 96%; background: #ff007f;"></div></div>
+                  </div>
+                </div>
+                <div class="crew-actions-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px;">
+                  <button class="crew-btn" style="margin-top: 0;" onclick="openAuditWithStyle('Vibe-Vortex')" data-i18n="crewBtnVibeVortex">Scan Trends</button>
+                  <button class="crew-btn sync-btn" style="margin-top: 0; border-color: rgba(0, 212, 255, 0.4); background: rgba(0, 212, 255, 0.05);" onclick="syncCrewCore('vibevortex', this)" data-i18n="syncCoreBtn">⚡ Sync Core</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Crew 8: Crypt-Key -->
+            <div class="crew-card" id="crew-card-cryptkey">
+              <div class="crew-image-wrapper">
+                <img src="../assets/images/avatar-worlds/crew-cryptkey.png" alt="Crypt-Key" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                <div class="crew-fallback-img" style="background: linear-gradient(135deg, #1c050a, #d90429); display:none; place-items:center; width:100%; height:100%; font-size:42px; font-weight:900;">CK</div>
+              </div>
+              <div class="crew-info">
+                <span class="crew-badge" style="background: rgba(217, 4, 41, 0.1); border-color: rgba(217, 4, 41, 0.3); color: #d90429;" data-i18n="crewCryptKeyBadge">The Shield</span>
+                <h3 data-i18n="crewCryptKeyName">Crypt-Key</h3>
+                <p data-i18n="crewCryptKeyDesc">Security. Encryption. Firewalls. He protects the quantum core from external glitched entities.</p>
+                
+                <div class="crew-stats">
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valSecurity">Security</span>
+                    <span class="stat-val" id="stat-val-cryptkey-1">99%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-cryptkey-1" style="--w: 99%; background: #d90429;"></div></div>
+                  </div>
+                  <div class="stat-row">
+                    <span class="stat-name" data-i18n="valDecryption">Decryption</span>
+                    <span class="stat-val" id="stat-val-cryptkey-2">94%</span>
+                    <div class="stat-bar"><div class="stat-fill" id="stat-fill-cryptkey-2" style="--w: 94%; background: #d90429;"></div></div>
+                  </div>
+                </div>
+                <div class="crew-actions-row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px;">
+                  <button class="crew-btn" style="margin-top: 0;" onclick="openAuditWithStyle('Crypt-Key')" data-i18n="crewBtnCryptKey">Verify Shield</button>
+                  <button class="crew-btn sync-btn" style="margin-top: 0; border-color: rgba(0, 212, 255, 0.4); background: rgba(0, 212, 255, 0.05);" onclick="syncCrewCore('cryptkey', this)" data-i18n="syncCoreBtn">⚡ Sync Core</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Tab Content: The Worlds -->
+        <div class="universe-tab-content" id="uni-worlds">
+          <div class="worlds-grid">
+            
+            <!-- World 1: BlankDigi Lab -->
+            <div class="world-card" onclick="runDiagnostics('lab')">
+              <div>
+                <div class="world-image" style="--from: #2b1740; --to: #00d4ff;">
+                  <img src="../assets/images/avatar-worlds/world-lab.png" alt="BlankDigi Lab" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                  <div style="display:none; width:100%; height:100%; place-items:center; font-size:32px; font-weight:900;">LAB</div>
+                </div>
+                <h3 data-i18n="worldLabName">BlankDigi Lab</h3>
+                <p data-i18n="worldLabDesc">The futuristic laboratory where ideas, AIs, avatars, and projects are born.</p>
+              </div>
+              <button class="card-btn" data-i18n="worldLabBtn">Activate Core</button>
+            </div>
+
+            <!-- World 2: Follovida Boutique -->
+            <div class="world-card" onclick="runDiagnostics('boutique')">
+              <div>
+                <div class="world-image" style="--from: #1c0a24; --to: #b84cff;">
+                  <img src="../assets/images/avatar-worlds/world-boutique.png" alt="Follovida Boutique" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                  <div style="display:none; width:100%; height:100%; place-items:center; font-size:32px; font-weight:900;">BOUTIQUE</div>
+                </div>
+                <h3 data-i18n="worldBoutiqueName">Follovida Boutique</h3>
+                <p data-i18n="worldBoutiqueDesc">Smart fashion boutique where technology meets style and client experience.</p>
+              </div>
+              <button class="card-btn" data-i18n="worldBoutiqueBtn">Scan Wardrobe</button>
+            </div>
+
+            <!-- World 3: The City -->
+            <div class="world-card" onclick="runDiagnostics('city')">
+              <div>
+                <div class="world-image" style="--from: #0f1c09; --to: #39b54a;">
+                  <img src="../assets/images/avatar-worlds/world-city.png" alt="The City" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                  <div style="display:none; width:100%; height:100%; place-items:center; font-size:32px; font-weight:900;">CITY</div>
+                </div>
+                <h3 data-i18n="worldCityName">The City</h3>
+                <p data-i18n="worldCityDesc">Connected city where humans, AIs, and creatures coexist with missions and challenges.</p>
+              </div>
+              <button class="card-btn" data-i18n="worldCityBtn">Trace Robo-Taxi</button>
+            </div>
+
+            <!-- World 4: The Metaverse -->
+            <div class="world-card" onclick="runDiagnostics('metaverse')">
+              <div>
+                <div class="world-image" style="--from: #111; --to: #555;">
+                  <img src="../assets/images/avatar-worlds/world-metaverse.png" alt="The Metaverse" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';" />
+                  <div style="display:none; width:100%; height:100%; place-items:center; font-size:32px; font-weight:900;">METAVERSE</div>
+                </div>
+                <h3 data-i18n="worldMetaverseName">The Metaverse</h3>
+                <p data-i18n="worldMetaverseDesc">Limitless space where everything is possible. The future of creation and innovation.</p>
+              </div>
+              <button class="card-btn" data-i18n="worldMetaverseBtn">Sync Matrix</button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Tab Content: The Series -->
+        <div class="universe-tab-content" id="uni-series">
+          <div class="series-grid-layout">
+            
+            <!-- Left: Timeline list -->
+            <div class="series-timeline">
+              <!-- Episode 1 -->
+              <div class="episode-node active" onclick="selectEpisode(0, this)">
+                <div class="episode-badge">Ep 01</div>
+                <div class="episode-details">
+                  <h3 data-i18n="ep1Title">Poposs arrives at BlankDigi Lab</h3>
+                  <p data-i18n="ep1Desc">Poposs breaks something in the lab... as usual.</p>
+                </div>
+              </div>
+              
+              <!-- Episode 2 -->
+              <div class="episode-node" onclick="selectEpisode(1, this)">
+                <div class="episode-badge" style="background: linear-gradient(135deg, var(--accent), var(--accent2));">Ep 02</div>
+                <div class="episode-details">
+                  <h3 data-i18n="ep2Title">Follovida dresses Poposs in AI mode</h3>
+                  <p data-i18n="ep2Desc">A star look for a boss unlike any other.</p>
+                </div>
+              </div>
+              
+              <!-- Episode 3 -->
+              <div class="episode-node" onclick="selectEpisode(2, this)">
+                <div class="episode-badge" style="background: rgba(57, 181, 74, 0.15); border-color: rgba(57, 181, 74, 0.4); color: #39b54a;">Ep 03</div>
+                <div class="episode-details">
+                  <h3 data-i18n="ep3Title">Mission in Town with Robo Taxi</h3>
+                  <p data-i18n="ep3Desc">Deliver a package? Easy... or not.</p>
+                </div>
+              </div>
+              
+              <!-- Episode 4 -->
+              <div class="episode-node" onclick="selectEpisode(3, this)">
+                <div class="episode-badge" style="background: rgba(0, 212, 255, 0.15); border-color: rgba(0, 212, 255, 0.4); color: var(--accent2);">Ep 04</div>
+                <div class="episode-details">
+                  <h3 data-i18n="ep4Title">AI glitches and everything goes wild</h3>
+                  <p data-i18n="ep4Desc">Glitch in the system. Who will save the day?</p>
+                </div>
+              </div>
+              
+              <!-- Episode 5 -->
+              <div class="episode-node" onclick="selectEpisode(4, this)">
+                <div class="episode-badge" style="background: rgba(255, 255, 255, 0.15); border-color: rgba(255, 255, 255, 0.4); color: white;">Ep 05</div>
+                <div class="episode-details">
+                  <h3 data-i18n="ep5Title">Summit meeting: Solutions & Plan</h3>
+                  <p data-i18n="ep5Desc">Strategy, creativity and friendship = victory.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Interactive Cyber Player -->
+            <div class="cyber-player-card">
+              <div class="player-screen">
+                <div class="player-screen-overlay">
+                  <div class="play-icon-glow" onclick="togglePlayPause()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" id="mainPlayIcon"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                  <span class="fake-time">00:00 / 02:45</span>
+                </div>
+                <div class="audio-waves" id="playerAudioWaves">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+              </div>
+              
+              <div class="player-info">
+                <div class="player-header">
+                  <span class="player-badge-node" id="player-badge">Ep 01</span>
+                  <span class="player-status-badge" id="player-status">STABLE</span>
+                </div>
+                <h4 id="player-title">Poposs arrives at BlankDigi Lab</h4>
+                <p id="player-desc">Poposs accidentally enters the quantum core containment and triggers a system-wide alarm. BlankDigi tries to contain the chaos.</p>
+                <div id="player-stats" style="font-family: monospace; font-size: 11px; color: var(--accent2); margin: 10px 0; opacity: 0.8; letter-spacing: 0.5px;">RENDER: 100% | SPEED: 60FPS</div>
+                
+                <!-- High-tech scrolling terminal logs -->
+                <div class="cyber-terminal">
+                  <div class="terminal-header">
+                    <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+                    <span class="term-title">SYSTEM_LOG // STATUS: ACTIVE</span>
+                  </div>
+                  <div class="terminal-body" id="player-log">> System initialized. Ready to render.</div>
+                </div>
+
+                <div class="player-footer">
+                  <div class="player-ctrl-group">
+                    <button class="player-ctrl-btn" onclick="prevEpisode()" title="Previous Episode">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg>
+                    </button>
+                    <button class="player-ctrl-btn" onclick="togglePlayPause()" id="playPauseBtn" title="Play / Pause">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" id="playPauseIcon"><path d="M8 5v14l11-7z"/></svg>
+                    </button>
+                    <button class="player-ctrl-btn" onclick="nextEpisode()" title="Next Episode">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6zm9-12h2v12h-2z"/></svg>
+                    </button>
+                  </div>
+                  <button class="player-btn-action" onclick="simulateEpisode()" data-i18n="simulateBtn">Render Episode</button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Tab Content: Mission & Values -->
+        <div class="universe-tab-content" id="uni-values">
+          <div class="values-grid">
+            <div class="values-block">
+              <h3 data-i18n="valuesHeader">Our Values</h3>
+              <ul>
+                <li>
+                  <strong data-i18n="val1Title">Creativity Without Limits</strong>
+                  <span data-i18n="val1Text">Pushing aesthetic boundaries in everything we construct.</span>
+                </li>
+                <li>
+                  <strong data-i18n="val2Title">Innovation & Technology</strong>
+                  <span data-i18n="val2Text">Leveraging cutting-edge AI and advanced workflows.</span>
+                </li>
+                <li>
+                  <strong data-i18n="val3Title">Quality & Excellence</strong>
+                  <span data-i18n="val3Text">Building premium high-converting assets.</span>
+                </li>
+                <li>
+                  <strong data-i18n="val4Title">Mutual Support & Friendship</strong>
+                  <span data-i18n="val4Text">Teamwork makes the digital universe happen.</span>
+                </li>
+                <li>
+                  <strong data-i18n="val5Title">Fun & Positivity</strong>
+                  <span data-i18n="val5Text">Creating content that brings smiles and energy.</span>
+                </li>
+              </ul>
+            </div>
+            <div class="mission-block">
+              <h3 data-i18n="missionHeader">Our Mission</h3>
+              <p class="mission-text" data-i18n="missionText">
+                To connect fashion, technology and emotion. To inspire the next generation to create, dare, and build the future with passion. The future is now, let's construct it together.
+              </p>
+              <div class="social-links-box">
+                <span data-i18n="followVibe">Follow the Vibe:</span>
+                <div class="social-icons">
+                  <a href="https://tiktok.com/@follovida.universe" target="_blank">🎵 TikTok</a>
+                  <a href="https://instagram.com/follovida.universe" target="_blank">📸 Instagram</a>
+                  <a href="https://youtube.com/@follovida.universe" target="_blank">📺 YouTube</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- BlankDigi Services Section -->
+      <section id="services">
+        <div class="section-head">
+          <div>
+            <h2 data-i18n="servicesTitle">What BlankDigi builds around your avatar</h2>
+          </div>
+          <div>
+            <p data-i18n="servicesText">
+              The avatar is only the visible part. The real value is the system behind it.
+            </p>
+          </div>
+        </div>
+        <div class="services-grid">
+          <!-- Card 1 -->
+          <div class="service-card">
+            <div class="service-icon">🎬</div>
+            <h3 data-i18n="service1Title">Avatar Direction</h3>
+            <p data-i18n="service1Text">We define the facial movements, expressions, lighting, and visual assets unique to your brand's avatar.</p>
+          </div>
+          <!-- Card 2 -->
+          <div class="service-card">
+            <div class="service-icon">✍️</div>
+            <h3 data-i18n="service2Title">Scripts & Hooks</h3>
+            <p data-i18n="service2Text">Our copywriters write high-converting hooks and scripts tailored for your target audience every week.</p>
+          </div>
+          <!-- Card 3 -->
+          <div class="service-card">
+            <div class="service-icon">📱</div>
+            <h3 data-i18n="service3Title">Video Formats</h3>
+            <p data-i18n="service3Text">We format the videos for multiple ratios and platform requirements, ensuring perfect rendering everywhere.</p>
+          </div>
+          <!-- Card 4 -->
+          <div class="service-card">
+            <div class="service-icon">🔄</div>
+            <h3 data-i18n="service4Title">Approval Workflow</h3>
+            <p data-i18n="service4Text">You review and approve every visual, script, and automation before they ever go live. You have full control.</p>
+          </div>
+          <!-- Card 5 -->
+          <div class="service-card">
+            <div class="service-icon">💬</div>
+            <h3 data-i18n="service5Title">Captions & CTAs</h3>
+            <p data-i18n="service5Text">Engaging post descriptions, tags, and calls-to-action written to drive clicks and conversions.</p>
+          </div>
+          <!-- Card 6 -->
+          <div class="service-card">
+            <div class="service-icon">⚙️</div>
+            <h3 data-i18n="service6Title">Content System</h3>
+            <p data-i18n="service6Text">A weekly publishing and scheduling workflow that keeps your brand active without eating up your calendar.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA Section -->
+      <section>
+        <div class="final-cta">
+          <!-- Cyber Tech Corners -->
+          <div class="tech-corner top-left"></div>
+          <div class="tech-corner top-right"></div>
+          <div class="tech-corner bottom-left"></div>
+          <div class="tech-corner bottom-right"></div>
+
+          <!-- Quantum Portal Radar Scanner -->
+          <div class="quantum-hud">
+            <div class="hud-circle ring-outer"></div>
+            <div class="hud-circle ring-inner"></div>
+            <div class="hud-scanner"></div>
+            <div class="hud-core">
+              <span class="hud-symbol">BD</span>
+            </div>
+            <div class="hud-specs">
+              <div class="spec-line spec-left" data-i18n="hudStatusActive">SYS.STATUS: ACTIVE</div>
+              <div class="spec-line spec-right" data-i18n="hudScanInactive">SCAN: INACTIVE</div>
+            </div>
+          </div>
+
+          <h2 data-i18n="finalTitle">Not sure which avatar fits your brand?</h2>
+          <p data-i18n="finalText">
+            Send us your business type and goal. We will suggest the best avatar world and content direction.
+          </p>
+          <div class="cta-row" style="justify-content: center;">
+            <button class="btn btn-primary" onclick="openAudit()" data-i18n="auditBtn2">Start BlankDigi Avatar Audit</button>
+            <button class="btn btn-secondary" onclick="openCompare()" data-i18n="compareBtn">Compare Styles</button>
+          </div>
+          <p class="trust-line" data-i18n="trustLine" style="margin-top: 18px; font-size: 14px; color: var(--accent2); font-weight: 600;">No payment required. Start with a free avatar audit on WhatsApp.</p>
+        </div>
+      </section>
+      
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-inner">
+        <!-- Footer Grid -->
+        <div class="footer-grid">
+
+          <!-- Column 1: Brand -->
+          <div class="footer-col footer-brand-col">
+            <div class="footer-logo">
+              <svg class="footer-logo-icon" width="24" height="24" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="8" fill="url(#footerGrad)"/>
+                <path d="M8 10h6c2.2 0 4 1.8 4 4s-1.8 4-4 4H8V10z" fill="white" fill-opacity="0.9"/>
+                <rect x="18" y="10" width="6" height="8" rx="2" fill="white" fill-opacity="0.5"/>
+                <rect x="8" y="20" width="16" height="3" rx="1.5" fill="white" fill-opacity="0.3"/>
+                <defs><linearGradient id="footerGrad" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#b84cff"/><stop offset="1" stop-color="#00d4ff"/></linearGradient></defs>
+              </svg>
+              <span>BlankDigi</span>
+            </div>
+            <p class="footer-tagline" data-i18n="footerTagline">The agency that transforms your marketing operations into intelligent automated systems.</p>
+            <div class="footer-contact-lines">
+              <a href="tel:+212675683497" class="footer-contact-link">
+                <span class="footer-contact-icon">📞</span> +212 675 683 497
+              </a>
+              <a href="mailto:support@blankdigi.com" class="footer-contact-link">
+                <span class="footer-contact-icon">📧</span> support@blankdigi.com
+              </a>
+              <span class="footer-contact-link footer-location">
+                <span class="footer-contact-icon">📍</span> <span data-i18n="footerLocation">El Jadida, Morocco</span>
+              </span>
+            </div>
+          </div>
+
+          <!-- Column 2: Services -->
+          <div class="footer-col">
+            <h4 class="footer-heading" data-i18n="footerServices">Services</h4>
+            <ul class="footer-links">
+              <li><a href="https://blankdigi.com/#services" data-i18n="footerSvcContent">AI Content System</a></li>
+              <li><a href="/ai-content-avatar/" data-i18n="footerSvcAvatar">AI Content Avatar</a></li>
+              <li><a href="https://blankdigi.com/#services" data-i18n="footerSvcCRM">CRM & WhatsApp Automation</a></li>
+              <li><a href="https://blankdigi.com/#services" data-i18n="footerSvcAds">Ads Performance Stack</a></li>
+              <li><a href="https://blankdigi.com/#services" data-i18n="footerSvcN8n">Custom n8n Workflows</a></li>
+              <li><a href="https://blankdigi.com/#services" data-i18n="footerSvcWeb">AI-Powered Websites</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Company -->
+          <div class="footer-col">
+            <h4 class="footer-heading" data-i18n="footerCompany">Company</h4>
+            <ul class="footer-links">
+              <li><a href="https://blankdigi.com/about.html" data-i18n="footerAbout">About</a></li>
+              <li><a href="https://blog.blankdigi.com" target="_blank" data-i18n="footerBlog">Blog</a></li>
+              <li><a href="https://blankdigi.com/built.html" data-i18n="footerBuilt">Built</a></li>
+              <li><a href="https://blankdigi.com/ai-agents.html" data-i18n="footerAgents">AI Agents</a></li>
+              <li><a href="https://blankdigi.com/contact.html" data-i18n="footerContact">Contact</a></li>
+              <li><a href="https://blankdigi.com/privacy.html" data-i18n="footerPrivacy">Privacy Policy</a></li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Connect -->
+          <div class="footer-col">
+            <h4 class="footer-heading" data-i18n="footerConnect">Connect</h4>
+            <div class="footer-social">
+              <a href="https://wa.me/212675683497?text=Hello%2C%20I%20want%20a%20free%20automation%20audit" target="_blank" rel="noopener" aria-label="WhatsApp" class="footer-social-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              </a>
+              <a href="https://www.youtube.com/@BlankDigi" target="_blank" rel="noopener" aria-label="YouTube" class="footer-social-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              </a>
+              <a href="https://www.instagram.com/blankdigi1" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              </a>
+              <a href="https://www.facebook.com/blankdigi1" target="_blank" rel="noopener" aria-label="Facebook" class="footer-social-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/hardou-brahim" target="_blank" rel="noopener" aria-label="LinkedIn" class="footer-social-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a href="https://x.com/BrahimHardou" target="_blank" rel="noopener" aria-label="X / Twitter" class="footer-social-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+              <a href="https://www.tiktok.com/@blankdigi.com" target="_blank" rel="noopener" aria-label="TikTok" class="footer-social-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+              </a>
+              <a href="https://blankdigi.com" target="_blank" rel="noopener" aria-label="Website" class="footer-social-btn">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+              </a>
+            </div>
+            <a href="https://wa.me/212675683497?text=Hello%2C%20I%20want%20a%20free%20avatar%20audit" target="_blank" rel="noopener" class="footer-audit-btn" data-i18n="footerAuditBtn">🚀 Free Avatar Audit</a>
+          </div>
+
+        </div>
+
+        <!-- Footer Divider -->
+        <div class="footer-divider"></div>
+
+        <!-- Footer Bottom -->
+        <div class="footer-bottom">
+          <p class="footer-copyright" data-i18n="footerCopyright">© 2026 BlankDigi. All rights reserved. Made with 🤖 + ☕ in Morocco.</p>
+          <p class="footer-slogan"><span data-i18n="footerSlogan">Ideas → Impact.</span></p>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Detail Modal -->
+  <div class="modal" id="worldModal">
+    <div class="modal-box" id="worldModalBox">
+      <button class="close" onclick="closeModal('worldModal')" aria-label="Close">×</button>
+      
+      <div class="modal-visual">
+        <div class="modal-avatar" id="modalIcon">
+          <!-- JS dynamic icon / image -->
+        </div>
+      </div>
+      
+      <div class="modal-content">
+        <h2 id="modalTitle">Avatar Title</h2>
+        <p class="lead" id="modalLine">Quick intro line about the avatar personality.</p>
+        
+        <div class="info-block">
+          <h4 id="worldLabel" data-i18n="worldLabel">World Context</h4>
+          <p id="modalWorld">Studio description</p>
+        </div>
+        
+        <div class="info-block">
+          <h4 id="bestForLabel" data-i18n="bestForLabel">Best For</h4>
+          <p id="modalBest">Target clients</p>
+        </div>
+        
+        <div class="info-block">
+          <h4 id="formatsLabel" data-i18n="formatsLabel">Best Video Formats</h4>
+          <ul id="modalFormats">
+            <!-- JS dynamic list -->
+          </ul>
+        </div>
+        
+        <div class="info-block">
+          <h4 id="sampleLabel" data-i18n="sampleLabel">Sample Content Idea</h4>
+          <p id="modalSample">Sample hook or concept</p>
+        </div>
+        
+        <div class="cta-row" style="margin-top: 30px;">
+          <button class="btn btn-primary" onclick="openAudit()" id="useStyleBtn" data-i18n="useStyleBtn">Use this style</button>
+          <button class="btn btn-secondary" onclick="openCompare()" id="compareStyleBtn" data-i18n="compareStyleBtn">Compare styles</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Compare Modal -->
+  <div class="modal" id="compareModal">
+    <div class="modal-box">
+      <button class="close" onclick="closeModal('compareModal')" aria-label="Close">×</button>
+      
+      <div class="modal-visual" style="--modalFrom: #111; --modalTo: #34206b;">
+        <div class="modal-avatar" style="font-size: 48px;">VS</div>
+        <h3>Compare Styles</h3>
+      </div>
+      
+      <div class="modal-content">
+        <h2 id="compareTitle" data-i18n="compareTitle">Compare Avatar Styles</h2>
+        <p class="lead" id="compareText" data-i18n="compareText">Choose based on your business goal, not only the look.</p>
+        
+        <div class="compare-list" id="compareListContainer">
+          <!-- Dynamic rendering via JS -->
+        </div>
+        
+        <button class="btn btn-primary" onclick="openAudit()" id="helpChooseBtn" data-i18n="helpChooseBtn" style="width: 100%; margin-top: 20px;">Help me choose</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Audit Modal -->
+  <div class="modal" id="auditModal">
+    <div class="modal-box">
+      <button class="close" onclick="closeModal('auditModal')" aria-label="Close">×</button>
+      
+      <div class="modal-visual" id="auditModalVisual" style="--modalFrom: #1d1230; --modalTo: #063444;">
+        <div class="modal-avatar" id="auditModalAvatar" style="font-size: 32px;">AUDIT</div>
+        <h3 id="auditModalSub" data-i18n="auditModalSub">Start Audit</h3>
+      </div>
+      
+      <div class="modal-content">
+        <h2 id="auditTitle" data-i18n="auditTitle">Start Avatar Audit</h2>
+        <p class="lead" id="auditText" data-i18n="auditText">Tell us about your brand and we will suggest the best avatar world.</p>
+        
+        <!-- Display Selected Style Badge if selected -->
+        <div id="selectedStyleContainer" style="display: none; margin-bottom: 20px; padding: 12px 16px; background: rgba(184, 76, 255, 0.1); border: 1px solid rgba(184, 76, 255, 0.25); border-radius: 12px;">
+          <span style="font-size: 13px; font-weight: 700; color: var(--accent2); text-transform: uppercase;" id="selectedStyleLabel" data-i18n="selectedStyleLabel">Selected Style:</span>
+          <span style="font-weight: 800; font-size: 15px; margin-left: 6px; color: white;" id="selectedStyleValue">Not Selected</span>
+        </div>
+
+        <form id="auditForm" onsubmit="submitAudit(event)">
+          <div class="form-grid">
+            <input id="nameInput" type="text" data-i18n-placeholder="namePlaceholder" placeholder="Your Name" required />
+            <input id="businessInput" type="text" data-i18n-placeholder="businessPlaceholder" placeholder="Business name" required />
+            
+            <select id="typeInput" required>
+              <option value="" data-i18n-label="typePlaceholder">Business type</option>
+              <option value="Fashion" data-i18n-label="typeFashion">Fashion</option>
+              <option value="Real Estate" data-i18n-label="typeRealEstate">Real Estate</option>
+              <option value="Digital Service" data-i18n-label="typeDigitalService">Digital Service</option>
+              <option value="Local Business" data-i18n-label="typeLocalBusiness">Local Business</option>
+              <option value="E-commerce" data-i18n-label="typeEcommerce">E-commerce</option>
+              <option value="Coach / Consultant" data-i18n-label="typeCoach">Coach / Consultant</option>
+              <option value="Other" data-i18n-label="typeOther">Other</option>
+            </select>
+            
+            <select id="platformInput" required>
+              <option value="" data-i18n-label="platformPlaceholder">Main Platform</option>
+              <option value="TikTok" data-i18n-label="platformTikTok">TikTok</option>
+              <option value="Instagram Reels" data-i18n-label="platformInstagram">Instagram Reels</option>
+              <option value="YouTube Shorts" data-i18n-label="platformYouTube">YouTube Shorts</option>
+              <option value="LinkedIn" data-i18n-label="platformLinkedIn">LinkedIn</option>
+              <option value="Facebook" data-i18n-label="platformFacebook">Facebook</option>
+              <option value="All platforms" data-i18n-label="platformAll">All platforms</option>
+            </select>
+            
+            <input id="whatsappInput" type="tel" data-i18n-placeholder="whatsappPlaceholder" placeholder="WhatsApp number" required style="grid-column: 1 / -1;" />
+            
+            <textarea id="goalInput" data-i18n-placeholder="goalPlaceholder" placeholder="What is your main content goal / message?"></textarea>
+          </div>
+          
+          <button class="btn btn-primary" type="submit" id="sendAuditBtn" style="width: 100%; margin-top: 24px;" data-i18n="sendAuditBtn">Send Audit Request</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diagnostics Modal -->
+  <div class="modal" id="diagModal">
+    <div class="modal-box" style="grid-template-columns: 1fr; max-width: 600px;">
+      <button class="close" onclick="closeModal('diagModal')" aria-label="Close">×</button>
+      
+      <div class="modal-visual" id="diagVisual" style="min-height: 180px; --modalFrom: #00d4ff; --modalTo: #b84cff; border-bottom: 1px solid var(--border); border-right: none;">
+        <div class="modal-avatar" id="diagWorldIcon" style="font-size: 32px; width: 100px; height: 100px; border-width: 3px;">SCAN</div>
+        <h3 id="diagWorldTitle" style="margin-top: 15px;">World Diagnostics</h3>
+      </div>
+      
+      <div class="modal-content" style="padding: 24px;">
+        <div class="diag-terminal">
+          <div class="terminal-header" style="display: flex; align-items: center; gap: 6px; padding: 8px 12px; background: #08080c; border-bottom: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px 8px 0 0;">
+            <span class="term-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #ff5f56;"></span>
+            <span class="term-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #ffbd2e;"></span>
+            <span class="term-dot" style="width: 8px; height: 8px; border-radius: 50%; background: #27c93f;"></span>
+            <span class="term-title" id="diagTermTitle" style="font-family: monospace; font-size: 10px; font-weight: 700; color: var(--muted); margin-left: 6px; text-transform: uppercase;">DIAGNOSTIC_RUN // BLANKDIGI_NET</span>
+          </div>
+          <div class="terminal-body" id="diagLog" style="background: #040406; color: #39b54a; font-family: monospace; font-size: 12.5px; padding: 16px; border-radius: 0 0 8px 8px; min-height: 160px; max-height: 200px; overflow-y: auto; line-height: 1.5; white-space: pre-wrap; border: 1px solid rgba(255, 255, 255, 0.05); border-top: none;">
+            <!-- Logs will render here line by line -->
+          </div>
+        </div>
+        
+        <button class="btn btn-primary" onclick="closeModal('diagModal')" style="width: 100%; margin-top: 20px; font-size: 14px; padding: 12px;" data-i18n="diagCloseBtn">Secure Connection</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="avatar-worlds.js"></script>
+</body>
+</html>
