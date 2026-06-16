@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BlankDigi Swarm OS — Live Command Center</title>
+  <meta name="description" content="A cinematic command-center dashboard concept for BlankDigi Swarm OS: agents, decisions, content signals, commerce signals, and live automation telemetry." />
+  <style>
+    :root {
+      --bg: #030506;
+      --panel: rgba(3, 8, 10, 0.92);
+      --line: rgba(220, 245, 255, 0.42);
+      --soft-line: rgba(220, 245, 255, 0.16);
+      --text: #e9fff7;
+      --muted: rgba(233, 255, 247, 0.62);
+      --green: #18ff95;
+      --red: #ff2e68;
+      --violet: #7c32ff;
+      --cyan: #00d4ff;
+      --amber: #ffcc66;
+      --shadow: 0 0 40px rgba(24, 255, 149, 0.11), inset 0 0 40px rgba(124, 50, 255, 0.05);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { background: var(--bg); }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      font-family: var(--sans);
+      background:
+        radial-gradient(circle at 20% 10%, rgba(124, 50, 255, 0.18), transparent 32%),
+        radial-gradient(circle at 80% 18%, rgba(0, 212, 255, 0.11), transparent 28%),
+        radial-gradient(circle at 65% 78%, rgba(255, 46, 104, 0.13), transparent 31%),
+        linear-gradient(180deg, #030506 0%, #010203 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.11;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at center, black 0%, transparent 78%);
+      z-index: 0;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.08;
+      background: repeating-linear-gradient(0deg, transparent 0 2px, rgba(255,255,255,0.18) 3px);
+      mix-blend-mode: screen;
+      z-index: 5;
+    }
+
+    .shell {
+      width: min(1440px, calc(100% - 28px));
+      margin: 16px auto 28px;
+      position: relative;
+      z-index: 2;
+      border: 1px solid var(--line);
+      padding: 12px;
+      background: rgba(0, 0, 0, 0.48);
+      box-shadow: var(--shadow);
+    }
+
+    .topbar, .panel, .strip, .mini-panel {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(8, 13, 16, 0.9), rgba(2, 5, 7, 0.94));
+      box-shadow: inset 0 0 28px rgba(0, 212, 255, 0.035);
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: 1.6fr auto auto auto;
+      gap: 12px;
+      align-items: center;
+      padding: 12px 14px;
+      font-family: var(--mono);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .mark {
+      width: 28px; height: 28px; border: 1px solid var(--line);
+      display: grid; place-items: center;
+      background: radial-gradient(circle, rgba(24,255,149,0.28), transparent 58%);
+      color: var(--green);
+      font-weight: 900;
+      box-shadow: 0 0 22px rgba(24,255,149,0.25);
+    }
+    .brand strong { font-size: clamp(14px, 1.6vw, 22px); color: #fff; white-space: nowrap; }
+    .brand span { color: var(--muted); }
+    .status, .clock, .round {
+      border: 1px solid var(--soft-line);
+      padding: 9px 12px;
+      color: var(--muted);
+      background: rgba(0,0,0,0.35);
+      white-space: nowrap;
+    }
+    .status b { color: var(--green); }
+    .blink { animation: blink 1.2s steps(2) infinite; }
+    @keyframes blink { 50% { opacity: .25; } }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr 1fr;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .panel { padding: 12px; min-height: 160px; position: relative; overflow: hidden; }
+    .panel::before {
+      content: attr(data-label);
+      position: absolute; top: 8px; left: 10px;
+      font-family: var(--mono); font-size: 10px;
+      color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase;
+    }
+    .panel > * { position: relative; z-index: 1; }
+    .panel-title {
+      margin: 20px 0 12px;
+      font-family: var(--mono);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .chip { color: var(--green); border: 1px solid rgba(24,255,149,.32); padding: 3px 6px; background: rgba(24,255,149,.07); }
+
+    .hero-metric .value {
+      font-family: var(--mono);
+      font-weight: 900;
+      font-size: clamp(36px, 5vw, 72px);
+      letter-spacing: -0.08em;
+      color: #fff;
+      text-shadow: 0 0 18px rgba(24,255,149,0.18);
+      line-height: 0.95;
+    }
+    .hero-metric .currency { color: var(--violet); letter-spacing: -0.12em; }
+    .metric-caption { color: var(--muted); font-family: var(--mono); font-size: 12px; margin-top: 8px; }
+    .metric-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 16px; }
+    .metric-card { border: 1px solid var(--soft-line); padding: 8px; background: rgba(255,255,255,0.025); font-family: var(--mono); }
+    .metric-card b { display: block; color: var(--green); font-size: 15px; margin-bottom: 5px; }
+    .metric-card span { color: var(--muted); font-size: 9px; text-transform: uppercase; }
+
+    .curve { height: 180px; border: 1px solid var(--soft-line); background: radial-gradient(circle at 80% 20%, rgba(24,255,149,.16), transparent 34%); padding: 12px; }
+    .curve svg { width: 100%; height: 100%; overflow: visible; }
+    .curve path.main { stroke: var(--green); stroke-width: 4; fill: none; filter: drop-shadow(0 0 8px rgba(24,255,149,.6)); stroke-dasharray: 600; animation: draw 3s ease-out both; }
+    .curve path.glow { stroke: rgba(24,255,149,.14); stroke-width: 18; fill: none; }
+    @keyframes draw { from { stroke-dashoffset: 600; } to { stroke-dashoffset: 0; } }
+
+    .board-wide { grid-column: span 2; }
+    .decision-grid { display: grid; grid-template-columns: 0.82fr 1.18fr; gap: 12px; align-items: stretch; }
+    .signal-list { list-style: none; padding: 0; margin: 0; font-family: var(--mono); }
+    .signal-list li { display: grid; grid-template-columns: 1fr auto; border-bottom: 1px solid var(--soft-line); padding: 8px 0; gap: 8px; font-size: 12px; }
+    .signal-list small { color: var(--muted); display: block; margin-top: 4px; }
+    .ok { color: var(--green); }
+    .warn { color: var(--amber); }
+    .bad { color: var(--red); }
+
+    .bars { height: 220px; display: flex; align-items: end; gap: 8px; padding: 20px 10px 8px; border: 1px solid var(--soft-line); background: rgba(255,255,255,0.02); }
+    .bar { flex: 1; min-width: 14px; background: linear-gradient(180deg, var(--green), rgba(24,255,149,0.32)); position: relative; animation: rise 1.2s ease-out both; }
+    .bar.red { background: linear-gradient(180deg, var(--red), rgba(255,46,104,0.28)); }
+    .bar::after { content: attr(data-v); position: absolute; top: -17px; left: 50%; transform: translateX(-50%); color: var(--muted); font-family: var(--mono); font-size: 10px; }
+    @keyframes rise { from { height: 3%; opacity:.25; } }
+
+    .ridge { grid-column: span 3; min-height: 280px; }
+    .ridge-scape { height: 245px; border: 1px solid var(--soft-line); overflow: hidden; background: radial-gradient(circle at 55% 28%, rgba(124,50,255,.42), transparent 36%), #05030b; position: relative; }
+    .ridge-scape svg { width: 100%; height: 100%; }
+    .ridge-line { fill: none; stroke: rgba(124,50,255,.76); stroke-width: 1.4; filter: drop-shadow(0 0 8px rgba(124,50,255,.55)); }
+    .ridge-line.hot { stroke: rgba(255,46,104,.82); }
+    .ridge-marker { position: absolute; left: 54%; top: 45%; border: 1px solid rgba(24,255,149,.8); color: var(--green); padding: 6px 9px; font: 11px var(--mono); background: rgba(0,0,0,.65); box-shadow: 0 0 24px rgba(24,255,149,.18); }
+
+    .network { grid-column: span 2; min-height: 310px; }
+    .network-canvas { height: 250px; border: 1px solid var(--soft-line); background: radial-gradient(circle at center, rgba(255,255,255,.055), transparent 42%); position: relative; overflow: hidden; }
+    .node { position: absolute; width: 12px; height: 12px; border-radius: 50%; background: #fff; box-shadow: 0 0 18px currentColor; color: #fff; }
+    .node.green { background: var(--green); color: var(--green); }
+    .node.red { background: var(--red); color: var(--red); }
+    .node.violet { background: var(--violet); color: var(--violet); }
+    .agent { position: absolute; border: 1px solid var(--line); border-radius: 999px; padding: 7px 10px; background: rgba(0,0,0,.72); font: 11px var(--mono); color: #fff; box-shadow: 0 0 22px rgba(255,255,255,.09); }
+    .agent::before { content: ""; display:inline-block; width:7px; height:7px; background: var(--green); border-radius:50%; margin-right: 6px; box-shadow: 0 0 10px var(--green); }
+    .net-line { position: absolute; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent); transform-origin: left center; opacity: .55; }
+
+    .feed { font-family: var(--mono); font-size: 12px; display: grid; gap: 8px; }
+    .event { border-bottom: 1px solid var(--soft-line); padding-bottom: 8px; color: var(--muted); display: grid; grid-template-columns: 48px 1fr; gap: 8px; }
+    .event b { color: var(--cyan); font-weight: 700; }
+    .event strong { color: #fff; font-weight: 700; }
+
+    .bottom-strip { margin-top: 12px; display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .mini-panel { padding: 12px; font-family: var(--mono); min-height: 86px; }
+    .mini-panel span { color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+    .mini-panel b { display:block; font-size: 24px; margin-top: 9px; color: #fff; letter-spacing: -0.06em; }
+    .mini-panel em { color: var(--green); font-style: normal; font-size: 11px; }
+
+    .footer {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--muted);
+      font: 11px var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      border-top: 1px solid var(--soft-line);
+      padding: 12px 4px 0;
+    }
+    .footer a { color: var(--green); text-decoration: none; }
+
+    @media (max-width: 980px) {
+      .topbar { grid-template-columns: 1fr; }
+      .grid, .decision-grid, .bottom-strip { grid-template-columns: 1fr; }
+      .board-wide, .ridge, .network { grid-column: auto; }
+      .metric-row { grid-template-columns: repeat(2, 1fr); }
+      .ridge-scape, .network-canvas { height: 220px; }
+      .footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand">
+        <div class="mark">✦</div>
+        <div>
+          <strong>BlankDigi Swarm OS</strong><br />
+          <span>Autonomous business command center · avatar project demo</span>
+        </div>
+      </div>
+      <div class="status"><b class="blink">● LIVE</b> · GITHUB PAGES</div>
+      <div class="round">ROUND #7156</div>
+      <div class="clock" id="clock">--:--:-- UTC</div>
+    </div>
+
+    <div class="grid">
+      <section class="panel hero-metric" data-label="Total Swarm Value">
+        <div class="panel-title">System Impact <span class="chip">71% mix rate</span></div>
+        <div class="value"><span class="currency">$</span>403,676</div>
+        <div class="metric-caption">realized · anonymized · sample data</div>
+        <div class="metric-row">
+          <div class="metric-card"><b>+31,423</b><span>content value</span></div>
+          <div class="metric-card"><b>+29,247</b><span>lead engine</span></div>
+          <div class="metric-card"><b>+28,062</b><span>commerce ops</span></div>
+          <div class="metric-card"><b>+14,276</b><span>agent savings</span></div>
+        </div>
+      </section>
+
+      <section class="panel" data-label="Top Run · Content Swarm">
+        <div class="panel-title">Avatar Engine Multiplier <span class="chip">+31,423</span></div>
+        <div class="curve">
+          <svg viewBox="0 0 400 170" preserveAspectRatio="none">
+            <path class="glow" d="M12 150 C 88 150, 95 130, 132 124 S 195 103, 222 68 S 286 22, 388 15" />
+            <path class="main" d="M12 150 C 88 150, 95 130, 132 124 S 195 103, 222 68 S 286 22, 388 15" />
+          </svg>
+        </div>
+      </section>
+
+      <section class="panel" data-label="Command Feed">
+        <div class="panel-title">Live Events <span class="chip">edge safe</span></div>
+        <div class="feed" id="feed">
+          <div class="event"><b>22:08</b><span><strong>YouTube Agent</strong> found weak retention after 3s.</span></div>
+          <div class="event"><b>22:09</b><span><strong>Avatar Agent</strong> generated 4 hook frames.</span></div>
+          <div class="event"><b>22:10</b><span><strong>Commerce Agent</strong> flagged FolloVida promo potential.</span></div>
+          <div class="event"><b>22:11</b><span><strong>Telegram Approval</strong> queued next action.</span></div>
+          <div class="event"><b>22:12</b><span><strong>Memory Agent</strong> synced last winning content angle.</span></div>
+        </div>
+      </section>
+
+      <section class="panel board-wide" data-label="Probability Lattice · 5,944 decisions">
+        <div class="panel-title">Decision Board <span class="chip">one board</span></div>
+        <div class="decision-grid">
+          <ul class="signal-list">
+            <li><span>Post new Short now<small>high watch-rate window</small></span><b class="ok">78%</b></li>
+            <li><span>Boost FolloVida reel<small>wait for comments signal</small></span><b class="warn">61%</b></li>
+            <li><span>Reply to warm lead<small>WhatsApp intent detected</small></span><b class="ok">92%</b></li>
+            <li><span>Generate new thumbnail<small>CTR gap against average</small></span><b class="ok">84%</b></li>
+            <li><span>Scale ad budget today<small>frequency rising</small></span><b class="bad">39%</b></li>
+          </ul>
+          <div class="bars" aria-label="Probability bar chart">
+            <div class="bar red" style="height:22%" data-v="22"></div>
+            <div class="bar red" style="height:36%" data-v="36"></div>
+            <div class="bar" style="height:54%" data-v="54"></div>
+            <div class="bar" style="height:71%" data-v="71"></div>
+            <div class="bar" style="height:84%" data-v="84"></div>
+            <div class="bar" style="height:49%" data-v="49"></div>
+            <div class="bar" style="height:33%" data-v="33"></div>
+            <div class="bar" style="height:18%" data-v="18"></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" data-label="Tail Scanner · Live">
+        <div class="panel-title">Signal Stack <span class="chip">UP</span></div>
+        <ul class="signal-list">
+          <li><span>Hot hooks detected<small>Darija comedy + AI</small></span><b class="ok">1,295</b></li>
+          <li><span>Lead probability<small>local business owners</small></span><b class="ok">+15.6%</b></li>
+          <li><span>Content fatigue<small>same structure reused</small></span><b class="warn">M</b></li>
+          <li><span>System confidence<small>safe demo telemetry</small></span><b class="ok">92.6%</b></li>
+          <li><span>Prediction<small>next best action</small></span><b class="ok">UP</b></li>
+        </ul>
+      </section>
+
+      <section class="panel ridge" data-label="Tail Probability Ridge · Strike Landscape">
+        <div class="panel-title">Opportunity Landscape <span class="chip">content · leads · commerce</span></div>
+        <div class="ridge-scape">
+          <svg viewBox="0 0 1100 245" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="fillRidge" x1="0" x2="1">
+                <stop offset="0" stop-color="rgba(124,50,255,.03)" />
+                <stop offset=".65" stop-color="rgba(124,50,255,.23)" />
+                <stop offset="1" stop-color="rgba(255,46,104,.27)" />
+              </linearGradient>
+            </defs>
+            <path d="M0 245 L0 220 C180 220 220 188 330 190 S520 165 610 122 S790 70 1100 94 L1100 245Z" fill="url(#fillRidge)" />
+            <script type="application/ecmascript"><![CDATA[
+              const svg = document.currentScript.parentNode;
+              for (let i = 0; i < 17; i++) {
+                const y = 220 - i * 10;
+                const d = `M0 ${y} C180 ${y} 220 ${y - 25 - i*2} 330 ${y - 20} S520 ${y - 38 - i*3} 610 ${y - 80 - i*2} S790 ${y - 125 - i*2} 1100 ${y - 98}`;
+                const p = document.createElementNS('http://www.w3.org/2000/svg','path');
+                p.setAttribute('d', d);
+                p.setAttribute('class', i > 11 ? 'ridge-line hot' : 'ridge-line');
+                svg.appendChild(p);
+              }
+            ]]></script>
+          </svg>
+          <div class="ridge-marker">PUBLISH · 84%<br />BEST SLOT · 21:00</div>
+        </div>
+      </section>
+
+      <section class="panel network" data-label="Memofish · Relationship graph simulation">
+        <div class="panel-title">Agent Relationship Graph <span class="chip">nodes 71</span></div>
+        <div class="network-canvas" id="networkCanvas">
+          <div class="net-line" style="left:18%;top:48%;width:28%;transform:rotate(7deg)"></div>
+          <div class="net-line" style="left:47%;top:49%;width:30%;transform:rotate(-13deg)"></div>
+          <div class="net-line" style="left:30%;top:30%;width:35%;transform:rotate(31deg)"></div>
+          <div class="agent" style="left:12%;top:34%">Lead Cluster</div>
+          <div class="agent" style="left:41%;top:52%">AI Core</div>
+          <div class="agent" style="left:70%;top:36%">Content Syn</div>
+          <div class="agent" style="left:54%;top:18%">Avatar Studio</div>
+          <span class="node green" style="left:49%;top:49%"></span>
+          <span class="node violet" style="left:25%;top:45%"></span>
+          <span class="node red" style="left:16%;top:70%"></span>
+          <span class="node green" style="left:78%;top:58%"></span>
+          <span class="node violet" style="left:67%;top:24%"></span>
+        </div>
+      </section>
+
+      <section class="panel" data-label="Edge Distribution">
+        <div class="panel-title">Confidence Meter <span class="chip">92.6%</span></div>
+        <ul class="signal-list">
+          <li><span>P(up)<small>next action positive</small></span><b class="ok">0.86</b></li>
+          <li><span>P(down)<small>risk of bad post timing</small></span><b class="bad">0.34</b></li>
+          <li><span>Edge vs book<small>detected advantage</small></span><b class="ok">+23%</b></li>
+          <li><span>Human approval<small>required before publishing</small></span><b class="warn">ON</b></li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="bottom-strip">
+      <div class="mini-panel"><span>Agents active</span><b>12</b><em>+3 today</em></div>
+      <div class="mini-panel"><span>Queued tasks</span><b>48</b><em>approval safe</em></div>
+      <div class="mini-panel"><span>Content ideas</span><b>156</b><em>ranked</em></div>
+      <div class="mini-panel"><span>Lead signals</span><b>27</b><em>warm intent</em></div>
+      <div class="mini-panel"><span>Error rate</span><b>0.4%</b><em>stable</em></div>
+    </div>
+
+    <div class="footer">
+      <span>Prototype UI only · ready for n8n / brandhub / YouTube / Meta / WooCommerce telemetry</span>
+      <a href="../">Back to Avatar Studio</a>
+    </div>
+  </div>
+
+  <script>
+    const clock = document.getElementById('clock');
+    const pad = (n) => String(n).padStart(2, '0');
+    function tick() {
+      const d = new Date();
+      clock.textContent = `${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())} UTC`;
+    }
+    tick(); setInterval(tick, 1000);
+
+    const canvas = document.getElementById('networkCanvas');
+    const colors = ['green', 'red', 'violet', ''];
+    for (let i = 0; i < 70; i++) {
+      const n = document.createElement('span');
+      n.className = `node ${colors[Math.floor(Math.random() * colors.length)]}`;
+      n.style.left = `${8 + Math.random() * 84}%`;
+      n.style.top = `${12 + Math.random() * 78}%`;
+      n.style.opacity = String(0.18 + Math.random() * 0.68);
+      n.style.transform = `scale(${0.35 + Math.random() * 0.9})`;
+      canvas.appendChild(n);
+    }
+
+    const events = [
+      ['22:13', 'Ads Agent', 'paused scale because frequency is rising.'],
+      ['22:14', 'Shorts Agent', 'recommended stronger first-frame contrast.'],
+      ['22:15', 'FolloVida Agent', 'found a product batch ready for visual promo.'],
+      ['22:16', 'Swarm Core', 'merged signals into next best action.']
+    ];
+    let index = 0;
+    setInterval(() => {
+      const feed = document.getElementById('feed');
+      const e = events[index % events.length];
+      const item = document.createElement('div');
+      item.className = 'event';
+      item.innerHTML = `<b>${e[0]}</b><span><strong>${e[1]}</strong> ${e[2]}</span>`;
+      feed.prepend(item);
+      while (feed.children.length > 5) feed.removeChild(feed.lastChild);
+      index++;
+    }, 3600);
+  </script>
+</body>
+</html>
