@@ -33,6 +33,18 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Pages
         uses: actions/configure-pages@v5
+      - name: Inject live UX patch
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          page = Path('ai-content-avatar/index.html')
+          html = page.read_text(encoding='utf-8')
+          marker = '  <script src="avatar-worlds.js"></script>'
+          patch = '  <script src="avatar-worlds.patch.js"></script>'
+          if patch not in html:
+              html = html.replace(marker, marker + '\n' + patch)
+              page.write_text(html, encoding='utf-8')
+          PY
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
