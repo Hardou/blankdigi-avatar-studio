@@ -3,92 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BlankDigi Swarm OS V2 — Neural War Room</title>
-  <meta name="description" content="Alternate cinematic Swarm OS demo for BlankDigi Avatar Studio." />
+  <title>BlankDigi Crypto Swarm — Data Center V2</title>
+  <meta name="description" content="BlankDigi Crypto Swarm Data Center V2: live crypto dashboard concept with BTC cockpit, risk governor, data center nodes, agents, and alerts." />
   <style>
-    :root{
-      --bg:#020209;--panel:#070812;--line:rgba(255,255,255,.18);--line2:rgba(0,255,170,.35);--txt:#f4fff9;--muted:rgba(244,255,249,.62);--g:#00ff9d;--c:#00d9ff;--p:#a64cff;--r:#ff2b66;--y:#ffe177;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;--sans:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
-    *{box-sizing:border-box}body{margin:0;min-height:100vh;color:var(--txt);font-family:var(--sans);background:radial-gradient(circle at 50% -10%,rgba(166,76,255,.32),transparent 35%),radial-gradient(circle at 100% 60%,rgba(0,217,255,.12),transparent 28%),linear-gradient(180deg,#020209,#000);overflow-x:hidden}
-    body:before{content:"";position:fixed;inset:0;background:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:42px 42px;mask-image:radial-gradient(circle,#000 0%,transparent 75%);pointer-events:none}body:after{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent 0 4px,rgba(255,255,255,.08) 5px);opacity:.16;pointer-events:none;mix-blend-mode:screen}
-    .app{width:min(1500px,calc(100% - 26px));margin:14px auto 30px;position:relative;z-index:2}.frame{border:1px solid var(--line);background:rgba(0,0,0,.38);box-shadow:0 0 70px rgba(0,255,157,.08);padding:12px}.top{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;border:1px solid var(--line);background:linear-gradient(90deg,rgba(0,255,157,.08),rgba(166,76,255,.08));padding:12px 14px;font:12px var(--mono);text-transform:uppercase;letter-spacing:.11em}.logo{display:flex;gap:12px;align-items:center}.cube{width:34px;height:34px;border:1px solid var(--line2);display:grid;place-items:center;color:var(--g);box-shadow:0 0 24px rgba(0,255,157,.22);background:rgba(0,255,157,.05)}.logo b{font-size:clamp(16px,2vw,25px)}.logo span{color:var(--muted)}.pill{border:1px solid var(--line);padding:9px 12px;background:rgba(0,0,0,.45);white-space:nowrap}.live{color:var(--g);text-shadow:0 0 12px var(--g)}
-    .hero{display:grid;grid-template-columns:1.05fr 1.35fr .8fr;gap:12px;margin-top:12px}.panel{position:relative;min-height:180px;border:1px solid var(--line);background:linear-gradient(180deg,rgba(9,10,20,.92),rgba(1,2,8,.94));padding:14px;overflow:hidden}.panel:before{content:attr(data-k);position:absolute;top:8px;left:10px;color:var(--muted);font:10px var(--mono);letter-spacing:.16em;text-transform:uppercase}.pt{margin:18px 0 12px;display:flex;justify-content:space-between;gap:10px;font:12px var(--mono);letter-spacing:.12em;text-transform:uppercase}.chip{color:var(--g);border:1px solid rgba(0,255,157,.35);padding:3px 7px;background:rgba(0,255,157,.06)}
-    .big{font:900 clamp(44px,7vw,96px)/.88 var(--mono);letter-spacing:-.1em}.big small{font-size:.38em;color:var(--p);letter-spacing:-.08em}.sub{color:var(--muted);font:12px var(--mono);margin-top:12px}.kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin-top:18px}.kpi{border:1px solid var(--line);padding:10px;background:rgba(255,255,255,.03);font-family:var(--mono)}.kpi b{display:block;color:var(--g);font-size:20px}.kpi span{font-size:10px;color:var(--muted);text-transform:uppercase}.orb{min-height:350px;display:grid;place-items:center}.brain{width:min(430px,84vw);aspect-ratio:1;position:relative;border:1px solid rgba(255,255,255,.1);border-radius:50%;background:radial-gradient(circle,rgba(0,255,157,.18),transparent 20%),radial-gradient(circle at 70% 30%,rgba(166,76,255,.35),transparent 18%),radial-gradient(circle at 30% 70%,rgba(255,43,102,.22),transparent 22%)}.ring{position:absolute;inset:8%;border:1px dashed rgba(0,217,255,.32);border-radius:50%;animation:spin 18s linear infinite}.ring:nth-child(2){inset:18%;border-color:rgba(166,76,255,.45);animation-duration:12s;animation-direction:reverse}.ring:nth-child(3){inset:30%;border-color:rgba(0,255,157,.45);animation-duration:9s}.core{position:absolute;inset:38%;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line2);background:#020209;color:var(--g);font:900 28px var(--mono);box-shadow:0 0 50px rgba(0,255,157,.25)}@keyframes spin{to{transform:rotate(360deg)}}.tag{position:absolute;border:1px solid var(--line);background:rgba(0,0,0,.78);padding:8px 10px;font:11px var(--mono);border-radius:999px}.t1{left:-4%;top:23%}.t2{right:-5%;top:30%}.t3{left:10%;bottom:4%}.t4{right:8%;bottom:8%}.tag:before{content:"● ";color:var(--g)}
-    .grid{display:grid;grid-template-columns:.9fr 1.1fr 1fr;gap:12px;margin-top:12px}.wide{grid-column:span 2}.full{grid-column:1/-1}.list{list-style:none;padding:0;margin:0;font:12px var(--mono)}.list li{display:grid;grid-template-columns:1fr auto;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.1)}.list small{display:block;color:var(--muted);margin-top:4px}.ok{color:var(--g)}.warn{color:var(--y)}.bad{color:var(--r)}
-    .timeline{height:255px;border:1px solid var(--line);position:relative;background:radial-gradient(circle at 20% 50%,rgba(0,255,157,.12),transparent 22%),radial-gradient(circle at 75% 45%,rgba(166,76,255,.18),transparent 25%);overflow:hidden}.wave{position:absolute;left:4%;right:4%;height:2px;background:linear-gradient(90deg,transparent,var(--g),transparent);box-shadow:0 0 16px var(--g);animation:pulse 2.5s ease-in-out infinite}.wave:nth-child(1){top:28%;animation-delay:0s}.wave:nth-child(2){top:45%;animation-delay:.4s;background:linear-gradient(90deg,transparent,var(--p),transparent)}.wave:nth-child(3){top:62%;animation-delay:.8s;background:linear-gradient(90deg,transparent,var(--r),transparent)}@keyframes pulse{50%{transform:scaleX(.55);opacity:.35}}
-    .columns{height:250px;border:1px solid var(--line);display:flex;align-items:end;gap:10px;padding:18px 12px;background:rgba(255,255,255,.025)}.col{flex:1;background:linear-gradient(180deg,var(--g),rgba(0,255,157,.18));min-height:18px;position:relative;animation:grow 1s ease both}.col.r{background:linear-gradient(180deg,var(--r),rgba(255,43,102,.14))}.col.p{background:linear-gradient(180deg,var(--p),rgba(166,76,255,.14))}.col:after{content:attr(data-v);position:absolute;top:-18px;left:50%;transform:translateX(-50%);font:10px var(--mono);color:var(--muted)}@keyframes grow{from{height:4%!important}}
-    .cards{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.card{border:1px solid var(--line);padding:14px;background:rgba(255,255,255,.03);min-height:110px;font-family:var(--mono)}.card span{color:var(--muted);font-size:10px;text-transform:uppercase}.card b{display:block;font-size:31px;margin:12px 0 4px;letter-spacing:-.08em}.card em{font-style:normal;color:var(--g);font-size:11px}.footer{display:flex;justify-content:space-between;gap:12px;margin-top:12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.12);font:11px var(--mono);text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}.footer a{color:var(--g);text-decoration:none}
-    @media(max-width:1000px){.top,.hero,.grid,.cards{grid-template-columns:1fr}.wide,.full{grid-column:auto}.pill{white-space:normal}.orb{min-height:300px}.tag{font-size:9px}.footer{flex-direction:column}}
+    :root{--bg:#020403;--panel:#050806;--panel2:#080d0b;--line:#34463e;--line2:#73877d;--txt:#ecfff6;--muted:#7e938a;--green:#00ff9d;--red:#ff163f;--yellow:#ffe600;--cyan:#00d8ff;--blue:#245cff;--orange:#ff8a00;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;--sans:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 45% 0%,rgba(0,255,157,.12),transparent 34%),linear-gradient(180deg,#040605,#000);color:var(--txt);font-family:var(--sans);overflow-x:hidden}body:before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 1px,transparent 2px 5px);opacity:.18;pointer-events:none;z-index:5}.wrap{width:min(1460px,calc(100% - 28px));margin:14px auto 32px;border:1px solid var(--line2);background:#010201;padding:8px;box-shadow:0 0 60px rgba(0,255,157,.08);position:relative}.marquee{height:28px;border:1px solid var(--line);display:flex;align-items:center;gap:28px;overflow:hidden;background:#020302;font:700 11px var(--mono);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;color:#fff}.marquee span{color:var(--muted)}.marquee b{color:var(--green)}.marquee em{color:var(--red);font-style:normal}.titlebar{margin-top:6px;border:1px solid var(--line);background:linear-gradient(90deg,#04100b,#020302);display:grid;grid-template-columns:1fr auto auto;gap:8px;align-items:center;padding:10px 12px;font:900 11px var(--mono);text-transform:uppercase;letter-spacing:.12em}.titlebar h1{font-size:clamp(15px,2vw,24px);margin:0;letter-spacing:.08em}.pill{border:1px solid var(--line);padding:7px 10px;background:#020302;color:var(--muted)}.pill b{color:var(--green)}.topgrid{display:grid;grid-template-columns:1.12fr .62fr .9fr;gap:6px;margin-top:6px}.panel{border:1px solid var(--line);background:linear-gradient(180deg,var(--panel2),var(--panel));min-height:130px;padding:10px;position:relative;overflow:hidden}.panel:before{content:attr(data-title);position:absolute;top:5px;left:8px;color:#fff;font:800 11px var(--mono);letter-spacing:.12em;text-transform:uppercase}.panel:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:.4}.pt{display:flex;justify-content:space-between;gap:8px;margin:18px 0 8px;color:var(--muted);font:11px var(--mono);text-transform:uppercase}.live{background:var(--green);color:#001b10;padding:2px 7px;font-weight:900}.safe{background:var(--green);color:#001b10;padding:2px 8px;font:900 11px var(--mono)}.watch{background:var(--yellow);color:#090900;padding:2px 8px;font:900 11px var(--mono)}.block{background:var(--red);color:#fff;padding:2px 8px;font:900 11px var(--mono)}.money{font:900 clamp(42px,6vw,76px)/.9 var(--mono);letter-spacing:-.08em;color:var(--green);text-shadow:0 0 18px rgba(0,255,157,.32)}.money small{font-size:.52em}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:12px}.stat{border:1px solid var(--line);padding:7px;background:rgba(255,255,255,.025);font-family:var(--mono)}.stat b{display:block;color:#fff;font-size:18px}.stat span{color:var(--muted);font-size:9px;text-transform:uppercase}.btc{display:grid;grid-template-columns:1fr 1fr;gap:6px}.btc .bias{font:900 40px/.92 var(--mono);letter-spacing:-.08em;color:var(--yellow)}.btc small{font:10px var(--mono);color:var(--muted);text-transform:uppercase}.candles{height:168px;border:1px solid var(--line);display:flex;align-items:end;gap:8px;padding:14px;background:#020302}.candle{width:16px;position:relative;background:var(--green)}.candle.red{background:var(--red)}.candle:before{content:"";position:absolute;left:7px;top:-18px;width:2px;height:calc(100% + 35px);background:currentColor;opacity:.65}.candle{color:var(--green)}.candle.red{color:var(--red)}.dc{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:6px}.rack{border:1px solid var(--line);background:#030504;padding:8px;font:10px var(--mono);min-height:58px}.rack b{color:var(--cyan);font-size:15px}.rack span{display:block;color:var(--muted);margin-top:4px}.rack strong{color:var(--green);float:right}.cycle{margin-top:6px;border:1px solid var(--line);padding:8px;background:#030504}.cycle-head{display:flex;justify-content:space-between;font:900 11px var(--mono);text-transform:uppercase;letter-spacing:.12em}.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:5px;margin-top:8px}.step{border:1px solid var(--line);padding:8px 6px;background:#050806;font:800 11px var(--mono);color:#fff}.step span{display:block;color:var(--muted);font-size:9px}.step.active{background:var(--yellow);color:#080900;border-color:#fff27a}.mainrow{display:grid;grid-template-columns:1.2fr .8fr;gap:6px;margin-top:6px}.decision{border:1px solid var(--line);background:#020302;padding:10px}.decision-title{display:flex;justify-content:space-between;margin-bottom:10px;font:900 11px var(--mono);text-transform:uppercase;letter-spacing:.12em}.tree{height:230px;position:relative;border:1px solid #1d2d27;background:radial-gradient(circle at 52% 28%,rgba(0,216,255,.11),transparent 24%)}.box{position:absolute;border:1px solid var(--line2);background:#09100d;padding:7px 12px;font:900 10px var(--mono);text-transform:uppercase;color:#fff;min-width:74px;text-align:center}.box.yellow{background:#252100;color:var(--yellow);border-color:#777000}.box.white{background:#eafff7;color:#142019}.box.green{background:#00b66a;color:#001d10;border-color:#00ff9d}.box.red{background:#2b050b;color:#ff7188;border-color:#ff163f}.line{position:absolute;height:2px;background:#53635c;transform-origin:left center}.line.g{background:var(--green)}.line.r{background:var(--red)}.edge{position:absolute;left:46%;top:8%;font:900 24px var(--mono);color:var(--cyan);text-shadow:0 0 12px rgba(0,216,255,.4)}.side{display:grid;gap:6px}.list{border:1px solid var(--line);background:#020302;padding:9px;font:11px var(--mono)}.list h3{margin:0 0 8px;font-size:11px;text-transform:uppercase;letter-spacing:.12em}.list div{display:grid;grid-template-columns:1fr auto;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.08);color:var(--muted)}.list div:last-child{border-bottom:0}.list b{color:#fff}.ok{color:var(--green)!important}.warn{color:var(--yellow)!important}.bad{color:var(--red)!important}.matrix{margin-top:6px;border:1px solid var(--line);padding:8px;background:#020302}.matrix-title{display:flex;justify-content:space-between;font:900 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}.table{display:grid;grid-template-columns:90px repeat(7,1fr);gap:4px;font:800 10px var(--mono);text-align:center}.cell{border:1px solid #1f3029;padding:5px;background:#070a08}.cell.h{color:var(--yellow);background:#050806}.cell.g{background:#00a85f;color:#fff}.cell.r{background:#e10028;color:#fff}.cell.y{background:#e2b900;color:#06110c}.cell.b{background:#1e5bff;color:#fff}.cell.o{background:#ff8700;color:#071008}.bottom{display:grid;grid-template-columns:1.35fr .55fr;gap:6px;margin-top:6px}.hist{height:245px;border:1px solid var(--line);background:#030504;display:flex;align-items:end;gap:3px;padding:18px 14px}.bar{flex:1;min-width:3px;background:var(--blue);height:20%;position:relative}.bar.r{background:var(--red)}.bar.y{background:var(--yellow)}.bar.g{background:var(--green)}.sidebox{display:grid;gap:6px}.mini{border:1px solid var(--line);background:#040705;padding:12px;font-family:var(--mono);min-height:74px}.mini span{display:block;color:var(--muted);font-size:10px;text-transform:uppercase}.mini b{display:block;font-size:28px;margin-top:8px}.mini .up{color:var(--green)}.mini .down{color:var(--red)}.foot{height:24px;border:1px solid var(--line);margin-top:6px;display:flex;align-items:center;justify-content:space-between;padding:0 8px;font:10px var(--mono);color:var(--muted);text-transform:uppercase}.foot a{color:var(--green);text-decoration:none}@media(max-width:980px){.titlebar,.topgrid,.mainrow,.bottom,.dc{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:repeat(3,1fr)}.table{font-size:8px;grid-template-columns:68px repeat(7,1fr)}.tree{height:300px}.box{transform:scale(.86);transform-origin:left top}.foot{height:auto;padding:8px;display:block}}
   </style>
 </head>
 <body>
-  <main class="app frame">
-    <header class="top">
-      <div class="logo"><div class="cube">◇</div><div><b>BlankDigi Neural War Room</b><br><span>Alternate Swarm OS demo · cinematic control layer</span></div></div>
-      <div class="pill"><span class="live">● LIVE</span> MAINNET SIM</div>
+  <main class="wrap">
+    <div class="marquee"><strong>● LIVE</strong><span>CRYPTO SWARM DATA CENTER V2</span><b>BTC 1H/4H ONLINE</b><span>ETH FUNDING NEUTRAL</span><b>SOL VOLUME SPIKE</b><span>XRP LIQ WATCH</span><b>TELEGRAM ARMED</b><em>TRADE MODE: WATCH ONLY</em></div>
+
+    <section class="titlebar">
+      <h1>BlankDigi Crypto Swarm · Live Data Center V2</h1>
+      <div class="pill"><b>BTC · ETH · SOL · XRP · DOGE</b></div>
       <div class="pill" id="clock">--:--:-- UTC</div>
-    </header>
+    </section>
 
-    <section class="hero">
-      <div class="panel" data-k="System Alpha">
-        <div class="pt">Swarm Pulse <span class="chip">active</span></div>
-        <div class="big"><small>×</small>11.38</div>
-        <p class="sub">Total operational leverage generated by agents across content, leads, approvals, and commerce flows.</p>
-        <div class="kpis"><div class="kpi"><b>734,452</b><span>automation events</span></div><div class="kpi"><b>83,029</b><span>agent decisions</span></div><div class="kpi"><b>92.6%</b><span>confidence</span></div><div class="kpi"><b>0.4%</b><span>error rate</span></div></div>
+    <section class="topgrid">
+      <div class="panel" data-title="● BTC main cockpit">
+        <div class="pt"><span>DATA CENTER · Casablanca edge node · OKX/Binance feed simulation</span><span class="watch">WATCH ONLY</span></div>
+        <div class="money"><small>$</small>77,880</div>
+        <div class="stats"><div class="stat"><b>H1 ↓</b><span>bearish pullback</span></div><div class="stat"><b>H4 ↑</b><span>macro uptrend</span></div><div class="stat"><b>0.012%</b><span>funding</span></div><div class="stat"><b>71%</b><span>confidence</span></div></div>
       </div>
-      <div class="panel orb" data-k="Swarm Brain">
-        <div class="brain"><div class="ring"></div><div class="ring"></div><div class="ring"></div><div class="core">OS</div><div class="tag t1">YouTube Agent</div><div class="tag t2">Avatar Agent</div><div class="tag t3">WooCommerce</div><div class="tag t4">Meta Signals</div></div>
+      <div class="panel" data-title="★ BTC regime">
+        <div class="pt"><span>risk-adjusted bias</span><span class="live">SAFE</span></div>
+        <div class="btc"><div><div class="bias">WAIT</div><small>Swarm action</small></div><div><small>Volatility</small><br><b style="color:var(--yellow);font:900 22px var(--mono)">HIGH</b><br><small>Liquidity trap possible</small></div></div>
       </div>
-      <div class="panel" data-k="Next Best Action">
-        <div class="pt">Operator Queue <span class="chip">human-safe</span></div>
-        <ul class="list">
-          <li><span>Publish short at 21:00<small>best watch window</small></span><b class="ok">84%</b></li>
-          <li><span>Generate 6 thumbnails<small>topic: AI client excuses</small></span><b class="ok">91%</b></li>
-          <li><span>Boost product reel<small>wait for comments</small></span><b class="warn">58%</b></li>
-          <li><span>Scale ads today<small>frequency pressure</small></span><b class="bad">34%</b></li>
-        </ul>
+      <div class="panel" data-title="BTC / USD · 5-min">
+        <div class="pt"><span>$77,880</span><span style="color:var(--red)">▼ 6.33%</span></div>
+        <div class="candles"><div class="candle" style="height:70%"></div><div class="candle" style="height:86%"></div><div class="candle red" style="height:62%"></div><div class="candle red" style="height:54%"></div><div class="candle red" style="height:44%"></div><div class="candle red" style="height:38%"></div><div class="candle red" style="height:24%"></div><div class="candle red" style="height:20%"></div><div class="candle" style="height:29%"></div><div class="candle" style="height:38%"></div></div>
       </div>
     </section>
 
-    <section class="grid">
-      <div class="panel wide" data-k="Signal Timeline">
-        <div class="pt">Probability Streams <span class="chip">content / leads / commerce</span></div>
-        <div class="timeline"><div class="wave"></div><div class="wave"></div><div class="wave"></div></div>
-      </div>
-      <div class="panel" data-k="Live Logs">
-        <div class="pt">Agent Log <span class="chip">rolling</span></div>
-        <ul class="list" id="logs">
-          <li><span>Shorts Agent<small>hook retention risk detected</small></span><b class="warn">M</b></li>
-          <li><span>Avatar Agent<small>new visual world ready</small></span><b class="ok">OK</b></li>
-          <li><span>Lead Agent<small>2 warm WhatsApp intents</small></span><b class="ok">+2</b></li>
-          <li><span>Memory Agent<small>reused winning Darija pattern</small></span><b class="ok">UP</b></li>
-        </ul>
-      </div>
+    <section class="dc">
+      <div class="rack"><strong>ONLINE</strong><b>NODE-01</b><span>Market Feed · BTC/ETH/SOL · 22ms</span></div><div class="rack"><strong>ONLINE</strong><b>NODE-02</b><span>Funding + Open Interest · synced</span></div><div class="rack"><strong>ONLINE</strong><b>NODE-03</b><span>Fear & Greed + News pulse · live</span></div><div class="rack"><strong>ARMED</strong><b>NODE-04</b><span>Telegram Alert Router · approval safe</span></div><div class="rack"><strong>SAFE</strong><b>NODE-05</b><span>Risk Governor · leverage off</span></div><div class="rack"><strong>LIVE</strong><b>NODE-06</b><span>Memory Agent · regime history</span></div>
+    </section>
 
-      <div class="panel" data-k="Strike Board">
-        <div class="pt">Decision Bars <span class="chip">5,944 trades</span></div>
-        <div class="columns"><div class="col r" style="height:22%" data-v="22"></div><div class="col r" style="height:39%" data-v="39"></div><div class="col p" style="height:52%" data-v="52"></div><div class="col" style="height:71%" data-v="71"></div><div class="col" style="height:84%" data-v="84"></div><div class="col" style="height:63%" data-v="63"></div><div class="col p" style="height:48%" data-v="48"></div></div>
-      </div>
-      <div class="panel wide" data-k="Content Factory">
-        <div class="pt">Avatar Studio Production <span class="chip">ready</span></div>
-        <ul class="list">
-          <li><span>Comedy Host Pack<small>Darija, fast zooms, sarcastic pauses</small></span><b class="ok">READY</b></li>
-          <li><span>FolloVida Visual Promo<small>product hero + lifestyle angles</small></span><b class="ok">QUEUE</b></li>
-          <li><span>English Global Variant<small>same character, changed language/topic</small></span><b class="warn">TEST</b></li>
-          <li><span>Swarm SaaS Demo<small>public UI, fake data, no secrets</small></span><b class="ok">LIVE</b></li>
-        </ul>
-      </div>
+    <section class="cycle">
+      <div class="cycle-head"><span>Crypto Signal Cycle · #2 489</span><span>Alert latency 0.70s</span></div>
+      <div class="steps"><div class="step"><span>01</span>Scan</div><div class="step"><span>02</span>Detect</div><div class="step"><span>03</span>Validate</div><div class="step"><span>04</span>Risk Check</div><div class="step active"><span>05</span>Alert</div><div class="step"><span>06</span>Archive</div></div>
+    </section>
 
-      <div class="panel full" data-k="Executive Cards">
-        <div class="pt">Operator Snapshot <span class="chip">one screen</span></div>
-        <div class="cards"><div class="card"><span>Active agents</span><b>12</b><em>stable</em></div><div class="card"><span>Queued approvals</span><b>48</b><em>Telegram safe</em></div><div class="card"><span>Video ideas</span><b>156</b><em>ranked</em></div><div class="card"><span>Warm leads</span><b>27</b><em>follow-up needed</em></div></div>
+    <section class="mainrow">
+      <section class="decision">
+        <div class="decision-title"><span>Crypto Strategy Decision Tree · every signal traced</span><span>In-flight 14</span></div>
+        <div class="tree">
+          <div class="edge">94.5%</div>
+          <div class="box" style="left:3%;top:44%">Ticker</div><div class="line" style="left:13%;top:49%;width:6%"></div>
+          <div class="box" style="left:20%;top:44%">Scan</div><div class="line" style="left:30%;top:49%;width:6%"></div>
+          <div class="box yellow" style="left:37%;top:44%">Regime</div>
+          <div class="line g" style="left:47%;top:47%;width:17%;transform:rotate(-31deg)"></div><div class="line" style="left:47%;top:50%;width:16%"></div><div class="line" style="left:47%;top:53%;width:17%;transform:rotate(29deg)"></div>
+          <div class="box white" style="left:58%;top:25%">BTC H4</div><div class="box white" style="left:58%;top:44%">Funding</div><div class="box yellow" style="left:58%;top:63%">Liq Map</div>
+          <div class="line g" style="left:69%;top:31%;width:16%;transform:rotate(20deg)"></div><div class="line" style="left:69%;top:50%;width:16%;transform:rotate(-18deg)"></div><div class="line r" style="left:69%;top:68%;width:16%;transform:rotate(-34deg)"></div>
+          <div class="box" style="left:82%;top:36%">Alert</div><div class="box white" style="left:82%;top:58%">Hold</div><div class="line g" style="left:91%;top:42%;width:5%"></div><div class="box green" style="left:94%;top:44%">Edge</div>
+          <div class="box" style="left:50%;top:78%;color:var(--green);font-size:14px">Liq Arb +$241</div>
+          <div style="position:absolute;right:2%;top:42%;font:900 13px var(--mono);color:#fff">STREAK<br><b style="color:var(--green);font-size:20px">57</b><br><br>PACE<br>$202/HR<br><br>NEXT<br>4S</div>
+        </div>
+      </section>
+      <aside class="side">
+        <div class="list"><h3>Risk Governor</h3><div><span>Max risk</span><b class="ok">1.2/10</b></div><div><span>Leverage mode</span><b class="bad">OFF</b></div><div><span>News risk</span><b class="warn">MEDIUM</b></div><div><span>Liquidity trap</span><b class="warn">POSSIBLE</b></div><div><span>Trade permission</span><b class="bad">BLOCKED</b></div></div>
+        <div class="list"><h3>Live Agent Logs</h3><div><span>BTC H1 closed below local VWAP</span><b>22:15</b></div><div><span>Funding neutral across BTC/ETH</span><b>22:16</b></div><div><span>SOL volume spike detected</span><b>22:17</b></div><div><span>Risk Governor blocked entry</span><b>22:18</b></div><div><span>Telegram watch alert queued</span><b>22:19</b></div></div>
+      </aside>
+    </section>
+
+    <section class="matrix">
+      <div class="matrix-title"><span>Crypto Robustness Matrix · 7 assets × 6 TF</span><span>Horizon 70/100 ●</span></div>
+      <div class="table">
+        <div class="cell h">ASSET</div><div class="cell h">5M</div><div class="cell h">15M</div><div class="cell h">30M</div><div class="cell h">1H</div><div class="cell h">4H</div><div class="cell h">1D</div><div class="cell h">AVG</div>
+        <div class="cell">BTCUSDT</div><div class="cell r">-6.6%</div><div class="cell y">-1.2%</div><div class="cell g">+8.6%</div><div class="cell g">+3.9%</div><div class="cell b">+7.8%</div><div class="cell r">-10.8%</div><div class="cell r">-5.3%</div>
+        <div class="cell">ETHUSDT</div><div class="cell y">-1.5%</div><div class="cell o">-3.7%</div><div class="cell b">+5.7%</div><div class="cell b">+6.1%</div><div class="cell r">-5.3%</div><div class="cell g">+3.9%</div><div class="cell g">+1.2%</div>
+        <div class="cell">SOLUSDT</div><div class="cell g">+4.7%</div><div class="cell g">+3.9%</div><div class="cell y">-1.1%</div><div class="cell o">-3.6%</div><div class="cell y">-1.1%</div><div class="cell y">-2.0%</div><div class="cell g">+2.5%</div>
+        <div class="cell">XRPUSDT</div><div class="cell b">+11.8%</div><div class="cell g">+5.3%</div><div class="cell r">-8.1%</div><div class="cell g">+2.4%</div><div class="cell b">+11.8%</div><div class="cell r">-8.0%</div><div class="cell b">+6.2%</div>
+        <div class="cell">DOGEUSDT</div><div class="cell r">-7.6%</div><div class="cell r">-8.2%</div><div class="cell y">-1.4%</div><div class="cell b">+10.6%</div><div class="cell b">+10.8%</div><div class="cell g">+1.4%</div><div class="cell g">+3.5%</div>
       </div>
     </section>
 
-    <div class="footer"><span>V2 prototype · darker neural cockpit style · no private data</span><a href="../">Back to V1</a></div>
+    <section class="bottom">
+      <div class="panel" data-title="Monte Carlo Significance · 7,320 simulated crypto paths · Swarm V5"><div class="hist" id="hist"></div></div>
+      <div class="sidebox"><div class="mini"><span>5th xile</span><b class="up">+4.1x</b></div><div class="mini"><span>Expected drawdown</span><b class="down">-7.6%</b></div><div class="mini"><span>P(-80%→103%)</span><b>1.8%</b></div></div>
+    </section>
+
+    <div class="foot"><span>Crypto Swarm Data Center V2 · prototype UI · sample data only · not financial advice</span><a href="../">Back to Avatar Studio</a></div>
   </main>
   <script>
-    const clock=document.getElementById('clock');const p=n=>String(n).padStart(2,'0');function t(){const d=new Date();clock.textContent=`${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())} UTC`}t();setInterval(t,1000);
-    const logData=['Meta Agent · CTR anomaly discovered','WooCommerce Agent · product stock check queued','YouTube Agent · 35.6% continue rate watched','Core · next best action recalculated'];let i=0;setInterval(()=>{const ul=document.getElementById('logs');const li=document.createElement('li');li.innerHTML=`<span>${logData[i%logData.length]}<small>live simulation event</small></span><b class="ok">NEW</b>`;ul.prepend(li);while(ul.children.length>4)ul.removeChild(ul.lastChild);i++},3300)
+    const h=document.getElementById('hist');for(let i=0;i<86;i++){const x=(i-43)/15;const y=Math.exp(-x*x/2);const b=document.createElement('div');b.className='bar '+(i<19?'r':i<25?'y':i>57?'g':'');b.style.height=(8+y*88)+'%';h.appendChild(b)}
+    const clock=document.getElementById('clock');const pad=n=>String(n).padStart(2,'0');function tick(){const d=new Date();clock.textContent=`${pad(d.getUTCHours())}:${pad(d.getUTCMinutes())}:${pad(d.getUTCSeconds())} UTC`}tick();setInterval(tick,1000);
   </script>
 </body>
 </html>
