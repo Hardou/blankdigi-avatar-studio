@@ -4,6 +4,8 @@
 
 BlankDigi Avatar Studio is a public showcase for a SaaS-style avatar content system: avatar worlds, brand audit flow, content positioning, and a premium AI studio interface.
 
+**Live demo:** https://hardou.github.io/blankdigi-avatar-studio/ai-content-avatar/
+
 > This repository is a public demo/showcase. Commercial use, resale, white-label deployment, or SaaS reuse requires permission from BlankDigi.
 
 ## What this project shows
@@ -50,24 +52,25 @@ The following must stay private:
 - Database dumps
 - Server configs
 
-## Suggested project structure
+## Project structure
 
 ```txt
 ai-content-avatar/
   index.html
   avatar-worlds.css
   avatar-worlds.js
-  assets/
-    images/
 
-docs/
-  screenshots/
-  roadmap.md
-  public-release-checklist.md
+assets/
+  images/
+    avatar-worlds/
+
+.github/
+  workflows/
+    pages.yml
 
 README.md
 LICENSE.md
-.gitignore
+.nojekyll
 ```
 
 ## Local preview
@@ -83,6 +86,16 @@ Then open:
 ```txt
 http://localhost:8080/ai-content-avatar/
 ```
+
+## Deployment
+
+The public demo is deployed with GitHub Pages.
+
+```txt
+https://hardou.github.io/blankdigi-avatar-studio/ai-content-avatar/
+```
+
+The repository root includes an `index.html` redirect so the base GitHub Pages URL can route users to the Avatar Studio page.
 
 ## Commercial licensing
 
