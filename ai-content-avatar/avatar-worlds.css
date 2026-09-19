@@ -3185,3 +3185,76 @@ body.light-theme .ai-tool-cta {
     text-align: left;
   }
 }
+
+
+/* AI Tools multi-card expansion */
+.ai-tool-card-featured {
+  border-color: rgba(24, 217, 255, 0.26);
+}
+
+.ai-tool-card-pending {
+  background:
+    radial-gradient(circle at 92% 8%, rgba(139, 92, 255, 0.08), transparent 30%),
+    var(--card);
+}
+
+.ai-tool-status-live {
+  color: var(--accent2-soft);
+  border-color: rgba(24, 217, 255, 0.25);
+  background: rgba(24, 217, 255, 0.07);
+}
+
+.ai-tool-cta-disabled {
+  cursor: not-allowed;
+  user-select: none;
+  opacity: 0.48;
+  filter: saturate(0.45);
+  box-shadow: none;
+}
+
+.ai-tool-cta-disabled:hover {
+  transform: none;
+  border-color: rgba(24, 217, 255, 0.32);
+  box-shadow: none;
+}
+
+.ai-tools-roadmap {
+  max-width: 820px;
+  margin: 18px auto 0;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.ai-tool-logo-synthesia {
+  background: linear-gradient(135deg, #6f52ff, #a982ff);
+}
+
+.ai-tool-logo-veed {
+  background: linear-gradient(135deg, #111827, #18d9ff);
+}
+
+.ai-tool-logo-pictory {
+  background: linear-gradient(135deg, #5f3dc4, #18d9ff);
+}
+
+.ai-tool-logo-invideo {
+  background: linear-gradient(135deg, #ff477e, #8b5cff);
+}
+
+.ai-tool-logo-opus {
+  background: linear-gradient(135deg, #ff7a18, #8b5cff);
+}
+
+@media (min-width: 980px) {
+  .ai-tools-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 979px) and (min-width: 701px) {
+  .ai-tools-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
