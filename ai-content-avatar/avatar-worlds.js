@@ -25,6 +25,18 @@ const translations = {
     
     worldsTitle: "Explore Avatar Worlds",
     worldsText: "Each world is built for a specific business type, audience, and content goal.",
+    aiToolsEyebrow: "AI Creation Stack",
+    aiToolsTitle: "The tools behind our creations",
+    aiToolsText: "Prefer to experiment yourself? Discover selected AI tools BlankDigi tests and integrates into creative workflows.",
+    aiToolsPartner: "Partner tool",
+    aiToolsTested: "Tested by BlankDigi",
+    syntxDescription: "Create AI visuals and turn images into short-form video creatives for social content and campaigns.",
+    syntxCap1: "Image → Video",
+    syntxCap2: "AI Creatives",
+    syntxCap3: "Short-form Video",
+    syntxCta: "Try SYNTX.AI ↗",
+    aiToolsNote: "DIY option — BlankDigi services remain fully managed.",
+    aiToolsDisclosure: "Partner link: BlankDigi may receive a commission if you subscribe through this link, at no extra cost to you.",
     filterAll: "🌐 All",
     filterCorporate: "💼 Corporate & Finance",
     filterFashion: "💎 Fashion & Luxury",
@@ -239,6 +251,18 @@ const translations = {
     
     worldsTitle: "Découvrez nos Univers d'Avatars",
     worldsText: "Chaque univers est conçu pour un type d'activité, une audience et un objectif de conversion précis.",
+    aiToolsEyebrow: "Stack de Création IA",
+    aiToolsTitle: "Les outils derrière nos créations",
+    aiToolsText: "Vous préférez expérimenter vous-même ? Découvrez une sélection d'outils IA que BlankDigi teste et intègre dans ses workflows créatifs.",
+    aiToolsPartner: "Outil partenaire",
+    aiToolsTested: "Testé par BlankDigi",
+    syntxDescription: "Créez des visuels IA et transformez des images en vidéos courtes pour vos contenus sociaux et vos campagnes.",
+    syntxCap1: "Image → Vidéo",
+    syntxCap2: "Créatifs IA",
+    syntxCap3: "Vidéo courte",
+    syntxCta: "Tester SYNTX.AI ↗",
+    aiToolsNote: "Option DIY — les services BlankDigi restent entièrement gérés.",
+    aiToolsDisclosure: "Lien partenaire : BlankDigi peut recevoir une commission si vous vous abonnez via ce lien, sans coût supplémentaire pour vous.",
     filterAll: "🌐 Tous",
     filterCorporate: "💼 Entreprises & Finance",
     filterFashion: "💎 Mode & Luxe",
@@ -3158,3 +3182,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+// Affiliate click instrumentation: works with GTM/dataLayer when available and keeps a local fallback.
+function trackAffiliateClick(tool, url) {
+  const payload = {
+    event: "affiliate_click",
+    affiliate_tool: tool,
+    affiliate_url: url,
+    page_path: window.location.pathname,
+    language: currentLang,
+    timestamp: new Date().toISOString()
+  };
+
+  if (Array.isArray(window.dataLayer)) {
+    window.dataLayer.push(payload);
+  }
+
+  try {
+    window.localStorage.setItem("blankdigi_affiliate_last_click", JSON.stringify(payload));
+  } catch (error) {
+    // Tracking must never block navigation.
+  }
+}
