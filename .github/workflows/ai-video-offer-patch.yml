@@ -1,0 +1,430 @@
+name: Add AI Video Production Offer
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/ai-video-offer-patch.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch-ai-video-offer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Patch Avatar Studio with AI Video Production offer
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          index_path = Path('ai-content-avatar/index.html')
+          css_path = Path('ai-content-avatar/avatar-worlds.css')
+          js_path = Path('ai-content-avatar/avatar-worlds.js')
+
+          index = index_path.read_text(encoding='utf-8')
+          css = css_path.read_text(encoding='utf-8')
+          js = js_path.read_text(encoding='utf-8')
+
+          # Broaden page positioning while preserving the existing URL/canonical.
+          index = index.replace(
+              '<title>AI Content Avatar Studio | BlankDigi</title>',
+              '<title>AI Content & Video Studio | BlankDigi</title>'
+          )
+          index = index.replace(
+              '<meta name="description" content="Choose an AI avatar world for your brand. BlankDigi builds scripts, visuals, captions, approvals, and weekly content systems around your avatar." />',
+              '<meta name="description" content="BlankDigi creates AI avatars, product ads, cinematic brand films, comedy creatives and recurring short-form video systems for brands." />'
+          )
+          index = index.replace(
+              '<meta property="og:title" content="AI Content Avatar Studio | BlankDigi" />',
+              '<meta property="og:title" content="AI Content & Video Studio | BlankDigi" />'
+          )
+          index = index.replace(
+              '<meta property="og:description" content="Pick your avatar world. BlankDigi builds the content system around it." />',
+              '<meta property="og:description" content="AI avatar systems and commercial AI video production for brands, ads and social content." />'
+          )
+
+          nav_anchor = '<a href="#worlds" data-i18n="navAvatarStudio">Avatar Studio</a>'
+          nav_video = '<a href="#ai-video-production" class="ai-video-nav" data-ai-video-en="AI Video" data-ai-video-fr="Vidéo IA">AI Video</a>'
+          if nav_video not in index and nav_anchor in index:
+              index = index.replace(nav_anchor, nav_anchor + '\n        ' + nav_video)
+
+          section_marker = '      <!-- AI Creation Stack / Affiliate Tools -->'
+          section = r'''      <!-- AI Video Production Offer -->
+      <section id="ai-video-production" class="ai-video-production-section">
+        <div class="ai-video-kicker" data-ai-video-en="BLANKDIGI AI VIDEO PRODUCTION" data-ai-video-fr="PRODUCTION VIDÉO IA BLANKDIGI">BLANKDIGI AI VIDEO PRODUCTION</div>
+
+        <div class="section-head ai-video-head">
+          <div>
+            <h2 data-ai-video-en="Commercial videos without the traditional production crew." data-ai-video-fr="Des vidéos commerciales sans équipe de tournage traditionnelle.">Commercial videos without the traditional production crew.</h2>
+          </div>
+          <div>
+            <p data-ai-video-en="From one product photo, a brand idea or an existing content direction, BlankDigi develops the concept, script, AI generation, edit, sound, subtitles and delivery for short-form campaigns." data-ai-video-fr="À partir d’une photo produit, d’une idée de marque ou d’une direction créative existante, BlankDigi développe le concept, le script, la génération IA, le montage, le son, les sous-titres et la livraison de campagnes courtes.">From one product photo, a brand idea or an existing content direction, BlankDigi develops the concept, script, AI generation, edit, sound, subtitles and delivery for short-form campaigns.</p>
+          </div>
+        </div>
+
+        <div class="ai-video-offer-grid">
+          <article class="ai-video-offer-card ai-video-offer-featured">
+            <span class="ai-video-card-code">01 / PRODUCT</span>
+            <h3 data-ai-video-en="AI Product Ads" data-ai-video-fr="Publicités Produit IA">AI Product Ads</h3>
+            <p data-ai-video-en="Product-first commercial creatives for e-commerce, fashion, beauty, local retail and launches." data-ai-video-fr="Créations publicitaires centrées sur le produit pour e-commerce, mode, beauté, commerce local et lancements.">Product-first commercial creatives for e-commerce, fashion, beauty, local retail and launches.</p>
+            <div class="ai-video-tags"><span>9:16</span><span>Ads</span><span>E-commerce</span></div>
+          </article>
+
+          <article class="ai-video-offer-card">
+            <span class="ai-video-card-code">02 / CINEMATIC</span>
+            <h3 data-ai-video-en="Cinematic Brand Films" data-ai-video-fr="Films de Marque Cinématiques">Cinematic Brand Films</h3>
+            <p data-ai-video-en="Impossible-looking scenes, visual storytelling and premium campaign films built with generative video." data-ai-video-fr="Scènes impossibles à tourner, storytelling visuel et films de campagne premium créés avec la vidéo générative.">Impossible-looking scenes, visual storytelling and premium campaign films built with generative video.</p>
+            <div class="ai-video-tags"><span>Story</span><span>Brand</span><span>Campaign</span></div>
+          </article>
+
+          <article class="ai-video-offer-card">
+            <span class="ai-video-card-code">03 / SOCIAL</span>
+            <h3 data-ai-video-en="Reels, Shorts & TikTok" data-ai-video-fr="Reels, Shorts & TikTok">Reels, Shorts & TikTok</h3>
+            <p data-ai-video-en="Fast vertical content designed for hooks, retention, iteration and platform-native testing." data-ai-video-fr="Contenu vertical rapide conçu pour les hooks, la rétention, l’itération et les tests natifs aux plateformes.">Fast vertical content designed for hooks, retention, iteration and platform-native testing.</p>
+            <div class="ai-video-tags"><span>Hooks</span><span>Vertical</span><span>Variants</span></div>
+          </article>
+
+          <article class="ai-video-offer-card">
+            <span class="ai-video-card-code">04 / COMEDY</span>
+            <h3 data-ai-video-en="AI Comedy & Viral Concepts" data-ai-video-fr="Comédie IA & Concepts Viraux">AI Comedy & Viral Concepts</h3>
+            <p data-ai-video-en="Brand-safe absurd comedy, visual misunderstandings and repeatable formats built for attention." data-ai-video-fr="Comédie absurde adaptée aux marques, malentendus visuels et formats répétables conçus pour capter l’attention.">Brand-safe absurd comedy, visual misunderstandings and repeatable formats built for attention.</p>
+            <div class="ai-video-tags"><span>Comedy</span><span>Attention</span><span>Series</span></div>
+          </article>
+
+          <article class="ai-video-offer-card">
+            <span class="ai-video-card-code">05 / CHARACTERS</span>
+            <h3 data-ai-video-en="AI Characters & Worlds" data-ai-video-fr="Personnages & Univers IA">AI Characters & Worlds</h3>
+            <p data-ai-video-en="Consistent fictional characters, presenters and visual worlds that can return across multiple videos." data-ai-video-fr="Personnages fictifs cohérents, présentateurs et univers visuels réutilisables dans plusieurs vidéos.">Consistent fictional characters, presenters and visual worlds that can return across multiple videos.</p>
+            <div class="ai-video-tags"><span>Identity</span><span>Worlds</span><span>Continuity</span></div>
+          </article>
+
+          <article class="ai-video-offer-card">
+            <span class="ai-video-card-code">06 / UGC</span>
+            <h3 data-ai-video-en="AI UGC & Presenters" data-ai-video-fr="UGC IA & Présentateurs">AI UGC & Presenters</h3>
+            <p data-ai-video-en="Presenter-led demos, testimonials-style formats and offer explanations without daily recording." data-ai-video-fr="Démos avec présentateur, formats type témoignage et explications d’offres sans tournage quotidien.">Presenter-led demos, testimonials-style formats and offer explanations without daily recording.</p>
+            <div class="ai-video-tags"><span>UGC</span><span>Demo</span><span>Presenter</span></div>
+          </article>
+        </div>
+
+        <div class="ai-video-process">
+          <div class="ai-video-process-intro">
+            <span class="ai-video-card-code" data-ai-video-en="PRODUCTION FLOW" data-ai-video-fr="PROCESSUS DE PRODUCTION">PRODUCTION FLOW</span>
+            <h3 data-ai-video-en="Brief → concept → final cut." data-ai-video-fr="Brief → concept → montage final.">Brief → concept → final cut.</h3>
+          </div>
+          <ol class="ai-video-process-steps">
+            <li><strong>01</strong><span data-ai-video-en="Brief" data-ai-video-fr="Brief">Brief</span></li>
+            <li><strong>02</strong><span data-ai-video-en="Concept" data-ai-video-fr="Concept">Concept</span></li>
+            <li><strong>03</strong><span data-ai-video-en="Script" data-ai-video-fr="Script">Script</span></li>
+            <li><strong>04</strong><span data-ai-video-en="AI Production" data-ai-video-fr="Production IA">AI Production</span></li>
+            <li><strong>05</strong><span data-ai-video-en="Edit + Sound" data-ai-video-fr="Montage + Son">Edit + Sound</span></li>
+            <li><strong>06</strong><span data-ai-video-en="Delivery" data-ai-video-fr="Livraison">Delivery</span></li>
+          </ol>
+        </div>
+
+        <div class="ai-video-packages">
+          <article>
+            <span class="ai-video-card-code">TEST CREATIVE</span>
+            <h3 data-ai-video-en="Start with one idea." data-ai-video-fr="Commencez avec une idée.">Start with one idea.</h3>
+            <p data-ai-video-en="One focused commercial creative to test the direction before scaling." data-ai-video-fr="Une création publicitaire ciblée pour tester la direction avant de passer à l’échelle.">One focused commercial creative to test the direction before scaling.</p>
+          </article>
+          <article>
+            <span class="ai-video-card-code">CAMPAIGN PACK</span>
+            <h3 data-ai-video-en="Test multiple angles." data-ai-video-fr="Testez plusieurs angles.">Test multiple angles.</h3>
+            <p data-ai-video-en="A batch of concepts or variations for a product, launch or campaign." data-ai-video-fr="Un lot de concepts ou variantes pour un produit, un lancement ou une campagne.">A batch of concepts or variations for a product, launch or campaign.</p>
+          </article>
+          <article>
+            <span class="ai-video-card-code">CONTENT ENGINE</span>
+            <h3 data-ai-video-en="Keep producing every month." data-ai-video-fr="Produisez chaque mois.">Keep producing every month.</h3>
+            <p data-ai-video-en="Recurring creative production with new hooks, formats and performance-led iterations." data-ai-video-fr="Production créative récurrente avec nouveaux hooks, formats et itérations guidées par la performance.">Recurring creative production with new hooks, formats and performance-led iterations.</p>
+          </article>
+        </div>
+
+        <div class="ai-video-cta-panel">
+          <div>
+            <span class="ai-video-card-code" data-ai-video-en="HAVE A PRODUCT OR IDEA?" data-ai-video-fr="VOUS AVEZ UN PRODUIT OU UNE IDÉE ?">HAVE A PRODUCT OR IDEA?</span>
+            <h3 data-ai-video-en="Send the brief. BlankDigi builds the creative." data-ai-video-fr="Envoyez le brief. BlankDigi construit la création.">Send the brief. BlankDigi builds the creative.</h3>
+            <p data-ai-video-en="No fixed public pricing: the scope depends on duration, number of scenes, character consistency and number of creative variations." data-ai-video-fr="Pas de tarif public fixe : le périmètre dépend de la durée, du nombre de scènes, de la cohérence des personnages et du nombre de variantes créatives.">No fixed public pricing: the scope depends on duration, number of scenes, character consistency and number of creative variations.</p>
+          </div>
+          <button class="btn btn-primary ai-video-cta" onclick="openAuditWithStyle('AI Video Production')" data-ai-video-en="Start an AI Video Project" data-ai-video-fr="Démarrer un projet vidéo IA">Start an AI Video Project</button>
+        </div>
+      </section>'''
+
+          if 'id="ai-video-production"' not in index:
+              if section_marker not in index:
+                  raise SystemExit('AI Creation Stack marker not found in index.html')
+              index = index.replace(section_marker, section + '\n\n' + section_marker)
+
+          css_marker = '/* === BlankDigi AI Video Production Offer === */'
+          css_block = r'''
+
+/* === BlankDigi AI Video Production Offer === */
+.ai-video-production-section {
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 8% 8%, rgba(0, 212, 255, 0.10), transparent 30%),
+    radial-gradient(circle at 92% 14%, rgba(184, 76, 255, 0.10), transparent 34%);
+}
+
+.ai-video-production-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .16;
+  background-image:
+    linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: linear-gradient(to bottom, black, transparent 90%);
+}
+
+.ai-video-kicker,
+.ai-video-card-code {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--accent2);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.ai-video-kicker {
+  margin-bottom: 18px;
+  padding: 8px 11px;
+  border: 1px solid rgba(0, 212, 255, .22);
+  border-radius: 999px;
+  background: rgba(0, 212, 255, .06);
+}
+
+.ai-video-head,
+.ai-video-offer-grid,
+.ai-video-process,
+.ai-video-packages,
+.ai-video-cta-panel { position: relative; z-index: 1; }
+
+.ai-video-offer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.ai-video-offer-card,
+.ai-video-packages article {
+  min-height: 250px;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,.045), rgba(255,255,255,.018));
+  transition: transform .22s ease, border-color .22s ease, background .22s ease;
+}
+
+.ai-video-offer-card:hover,
+.ai-video-packages article:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0, 212, 255, .32);
+  background: linear-gradient(180deg, rgba(0,212,255,.06), rgba(184,76,255,.025));
+}
+
+.ai-video-offer-featured {
+  border-color: rgba(0, 212, 255, .34);
+  box-shadow: inset 0 0 0 1px rgba(0,212,255,.04), 0 22px 70px rgba(0,0,0,.14);
+}
+
+.ai-video-offer-card h3,
+.ai-video-packages h3,
+.ai-video-process h3,
+.ai-video-cta-panel h3 {
+  margin: 12px 0 10px;
+  font-size: 22px;
+  line-height: 1.15;
+}
+
+.ai-video-offer-card p,
+.ai-video-packages p,
+.ai-video-cta-panel p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.ai-video-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 24px;
+}
+
+.ai-video-tags span {
+  padding: 6px 9px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.ai-video-process {
+  display: grid;
+  grid-template-columns: .8fr 1.7fr;
+  gap: 30px;
+  margin-top: 18px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: rgba(5, 7, 12, .48);
+}
+
+.ai-video-process-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ai-video-process-steps li {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  min-height: 92px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: rgba(255,255,255,.025);
+}
+
+.ai-video-process-steps strong {
+  color: var(--accent2);
+  font-family: ui-monospace, monospace;
+  font-size: 11px;
+}
+
+.ai-video-process-steps span {
+  font-weight: 800;
+  font-size: 13px;
+}
+
+.ai-video-packages {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.ai-video-packages article { min-height: 190px; }
+
+.ai-video-cta-panel {
+  display: grid;
+  grid-template-columns: 1.4fr auto;
+  align-items: center;
+  gap: 28px;
+  margin-top: 18px;
+  padding: 30px;
+  border: 1px solid rgba(184, 76, 255, .28);
+  border-radius: 22px;
+  background:
+    linear-gradient(110deg, rgba(184,76,255,.09), rgba(0,212,255,.06)),
+    rgba(255,255,255,.02);
+}
+
+.ai-video-cta { white-space: nowrap; }
+
+body.light-theme .ai-video-production-section {
+  background:
+    radial-gradient(circle at 8% 8%, rgba(0, 153, 204, .08), transparent 30%),
+    radial-gradient(circle at 92% 14%, rgba(122, 57, 201, .07), transparent 34%);
+}
+
+body.light-theme .ai-video-process,
+body.light-theme .ai-video-offer-card,
+body.light-theme .ai-video-packages article,
+body.light-theme .ai-video-cta-panel {
+  background-color: rgba(255,255,255,.58);
+}
+
+@media (max-width: 980px) {
+  .ai-video-offer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ai-video-process { grid-template-columns: 1fr; }
+  .ai-video-cta-panel { grid-template-columns: 1fr; }
+  .ai-video-cta { width: 100%; }
+}
+
+@media (max-width: 700px) {
+  .ai-video-offer-grid,
+  .ai-video-packages,
+  .ai-video-process-steps { grid-template-columns: 1fr; }
+  .ai-video-offer-card { min-height: 0; }
+  .ai-video-process,
+  .ai-video-cta-panel { padding: 20px; }
+}
+'''
+          if css_marker not in css:
+              css += css_block
+
+          js_marker = '// === BlankDigi AI Video Production locale bridge ==='
+          js_block = r'''
+
+// === BlankDigi AI Video Production locale bridge ===
+(function () {
+  function applyAiVideoLocale(lang) {
+    var key = lang === 'fr' ? 'aiVideoFr' : 'aiVideoEn';
+    document.querySelectorAll('[data-ai-video-en]').forEach(function (node) {
+      var value = node.dataset[key];
+      if (value) node.textContent = value;
+    });
+  }
+
+  function activeAiVideoLanguage() {
+    var active = document.querySelector('.lang-switch button.active');
+    return active && active.textContent.trim().toLowerCase() === 'fr' ? 'fr' : 'en';
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    applyAiVideoLocale(activeAiVideoLanguage());
+    document.querySelectorAll('.lang-switch button').forEach(function (button) {
+      button.addEventListener('click', function () {
+        window.setTimeout(function () {
+          applyAiVideoLocale(button.textContent.trim().toLowerCase() === 'fr' ? 'fr' : 'en');
+        }, 0);
+      });
+    });
+  });
+})();
+'''
+          if js_marker not in js:
+              js += js_block
+
+          index_path.write_text(index, encoding='utf-8')
+          css_path.write_text(css, encoding='utf-8')
+          js_path.write_text(js, encoding='utf-8')
+          PY
+
+      - name: Commit patched studio files
+        shell: bash
+        run: |
+          git config user.name "BlankDigi Automation"
+          git config user.email "96664252+Hardou@users.noreply.github.com"
+          git add ai-content-avatar/index.html ai-content-avatar/avatar-worlds.css ai-content-avatar/avatar-worlds.js
+          if git diff --cached --quiet; then
+            echo "No patch required."
+            exit 0
+          fi
+          git commit -m "Add AI video production sales section"
+          git push origin HEAD:main
