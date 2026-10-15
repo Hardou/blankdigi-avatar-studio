@@ -16,7 +16,7 @@
   "referenceCount": 1,
   "promptAccess": "public",
   "tags": ["FREE", "FolloVida", "surreal", "elevator", "world-switch"],
-  "video": "./media/previews/fv-the-wrong-floor-20261015/preview.mp4",
+  "video": "/media/prompt-cinema/fv-the-wrong-floor-20261015/preview.mp4",
   "prompt": "Create a 10-second vertical absurd retail-comedy mini-scene. Start inside a normal everyday situation that repeatedly opens into unexpected Moroccan environments. Keep the main character completely serious, use fast readable reveals and hard transitions, let the clothing exist naturally in the scene rather than being presented like an ad, and finish by looping back to the opening absurdity with a dry FolloVida punchline. Preserve outfit continuity and avoid model posing or conventional product-showcase shots.",
   "publicSummary": "Free starter recipe: normal setting → impossible world switches → natural FolloVida interruption → return to opening world. The production prompt, exact beat map, dialogue, reference instructions and negative-prompt package remain private.",
   "logic": "Absurd location loop → FolloVida interruption → return to opening world",
