@@ -132,6 +132,35 @@ node video-prompt-library/scripts/validate-library.mjs
 
 The validator checks required fields, duplicate IDs, access/prompt rules, redacted-record leakage and supported media paths.
 
+## PRO interest requests and events
+
+The catalog PRO CTA opens a contact panel with the existing BlankDigi WhatsApp
+and email destinations. Drafts contain only the public record ID and canonical
+detail link. The visitor chooses whether to send; no form is submitted, payment
+is taken or recipe unlocked. Local imports cannot create requests or events.
+
+`events.js` emits into the in-memory `window.dataLayer` queue and dispatches a
+`prompt-cinema:event` browser CustomEvent. No GA4/GTM script, collector, cookies,
+storage or analytics network requests are added. Central reporting is not
+configured. A future consumer must apply the site's consent requirements.
+
+Payload keys are limited to `event`, `record_id`, `access` and `surface`
+(`card` or `detail`). Prompts, query strings, titles, contact data and user IDs
+are excluded. Events:
+
+- `preview_play`: actual `playing`, once per catalog record per page load,
+  shared across card/detail and filter rerenders.
+- `copy_free_prompt`: successful FREE starter copy; failed copies and JSON
+  exports do not emit it.
+- `pro_unlock_click`: PRO request panel opened by the CTA; this measures
+  interest, not a submitted lead or a purchase.
+
+Run the event contract checks alongside library validation:
+
+```bash
+node video-prompt-library/scripts/test-events.mjs
+```
+
 ## Next phase
 
 ```txt

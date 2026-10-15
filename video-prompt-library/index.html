@@ -107,6 +107,7 @@
             <span>Recipe</span>
             <div class="prompt-actions">
               <button class="copy-button" id="copyDetailPrompt">Copy free starter</button>
+              <button class="copy-button" id="unlockDetail" hidden>Unlock Full Recipe</button>
               <button class="copy-button subtle" id="copyDetailJson">Copy public JSON</button>
             </div>
           </div>
@@ -121,6 +122,16 @@
           <pre id="detailNegativePrompt"></pre>
         </div>
 
+        <section class="pro-contact" id="proContact" aria-label="Request PRO access" hidden>
+          <strong>Request PRO access</strong>
+          <p>Contact BlankDigi for availability and next steps. This request does not unlock or purchase a recipe.</p>
+          <code id="proContactId"></code>
+          <div class="prompt-actions">
+            <a class="copy-button" id="proWhatsapp" target="_blank" rel="noopener noreferrer">Request via WhatsApp ↗</a>
+            <a class="copy-button subtle" id="proEmail">Request via email</a>
+          </div>
+        </section>
+
         <div class="notes-block" id="detailNotes"></div>
         <div class="tag-list" id="detailTags"></div>
       </div>
@@ -129,6 +140,7 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
   <script src="./manifest-preload.js"></script>
+  <script src="./events.js"></script>
   <script src="./app.js"></script>
 </body>
 </html>

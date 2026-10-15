@@ -294,3 +294,9 @@ footer { display: flex; justify-content: space-between; gap: 12px; padding: 28px
 
 /* Respect native visibility semantics for video fallbacks and modal panels. */
 [hidden] { display: none !important; }
+/* PRO interest requests remain separate from the locked public recipe. */
+.pro-contact { margin-top: 18px; padding: 18px; border: 1px solid var(--border); border-radius: 14px; }
+.pro-contact p { line-height: 1.6; }
+.pro-contact code { display: block; overflow-wrap: anywhere; margin-bottom: 14px; }
+.pro-contact a { display: inline-block; text-decoration: none; }
+.prompt-actions { flex-wrap: wrap; }

@@ -34,6 +34,11 @@
     redactedNotice: document.getElementById('redactedNotice'),
     copyDetailPrompt: document.getElementById('copyDetailPrompt'),
     copyDetailJson: document.getElementById('copyDetailJson'),
+    unlockDetail: document.getElementById('unlockDetail'),
+    proContact: document.getElementById('proContact'),
+    proContactId: document.getElementById('proContactId'),
+    proWhatsapp: document.getElementById('proWhatsapp'),
+    proEmail: document.getElementById('proEmail'),
     toast: document.getElementById('toast'),
     importButton: document.getElementById('importButton'),
     importInput: document.getElementById('importInput'),
@@ -80,6 +85,7 @@
       if (!response.ok) throw new Error(`Library fetch failed: ${response.status}`);
       const payload = await response.json();
       state.baseLibrary = normalizePayload(payload);
+      window.PromptCinemaEvents?.configureCatalog(state.baseLibrary);
     } catch (error) {
       console.error(error);
       showToast('Could not load library data');
@@ -217,11 +223,17 @@
     });
 
     els.grid.addEventListener('click', async event => {
+      const unlockButton = event.target.closest('[data-unlock]');
+      if (unlockButton) {
+        event.stopPropagation();
+        openProContact(unlockButton.dataset.unlock, 'card');
+        return;
+      }
       const copyButton = event.target.closest('[data-copy]');
       if (copyButton) {
         event.stopPropagation();
         const item = state.library.find(entry => entry.id === copyButton.dataset.copy);
-        if (item && isPublicPrompt(item)) await copyText(item.prompt, 'Prompt copied');
+        if (item && isPublicPrompt(item) && await copyText(item.prompt, 'Prompt copied')) track('copy_free_prompt', item, 'card');
         return;
       }
 
@@ -230,6 +242,7 @@
     });
 
     els.grid.addEventListener('keydown', event => {
+      if (event.target.closest('button, a')) return;
       const card = event.target.closest('[data-open]');
       if (!card) return;
       if (event.key === 'Enter' || event.key === ' ') {
@@ -242,6 +255,17 @@
       const video = event.target.closest('video[data-preview]');
       if (video) video.play().catch(() => {});
     });
+
+    els.grid.addEventListener('playing', event => {
+      const card = event.target.closest('[data-open]');
+      if (event.target.matches('video[data-preview]') && card) {
+        track('preview_play', state.library.find(item => item.id === card.dataset.open), 'card');
+      }
+    }, true);
+    els.detailVideo.addEventListener('playing', () => {
+      track('preview_play', state.library.find(item => item.id === state.currentId), 'detail');
+    });
+    els.unlockDetail.addEventListener('click', () => openProContact(state.currentId, 'detail'));
 
     els.grid.addEventListener('pointerout', event => {
       const video = event.target.closest('video[data-preview]');
@@ -267,7 +291,7 @@
 
     els.copyDetailPrompt.addEventListener('click', async () => {
       const item = state.library.find(entry => entry.id === state.currentId);
-      if (item && isPublicPrompt(item)) await copyText(item.prompt, 'Prompt copied');
+      if (item && isPublicPrompt(item) && await copyText(item.prompt, 'Prompt copied')) track('copy_free_prompt', item, 'detail');
     });
 
     els.copyDetailJson.addEventListener('click', async () => {
@@ -325,7 +349,9 @@
     const tags = (item.tags || []).slice(0, 3).map(tag => `<span>#${esc(tag)}</span>`).join('');
     const promptCopy = isPublicPrompt(item)
       ? `<button class="secondary-btn" data-copy="${esc(item.id)}">Copy prompt</button>`
-      : `<button class="secondary-btn locked" disabled>PRO · Unlock Full Recipe</button>`;
+      : (isCatalogPro(item)
+        ? `<button class="secondary-btn" data-unlock="${esc(item.id)}">PRO · Unlock Full Recipe</button>`
+        : `<button class="secondary-btn locked" disabled>PRO · Unlock Full Recipe</button>`);
     const snippet = isPublicPrompt(item) ? item.prompt : (item.publicSummary || 'Prompt omitted from the public catalog.');
     const score = item.score == null ? '' : `<span class="score-badge">${esc(item.score)} score</span>`;
     const local = item.localOnly ? `<span class="local-badge">LOCAL</span>` : '';
@@ -382,6 +408,8 @@
     els.redactedNotice.hidden = publicPrompt;
     els.copyDetailPrompt.hidden = !publicPrompt;
     els.copyDetailPrompt.disabled = !publicPrompt;
+    els.unlockDetail.hidden = !isCatalogPro(item);
+    els.proContact.hidden = true;
 
     els.detailNegativePrompt.textContent = item.negativePrompt || '';
     els.negativePromptBlock.hidden = !item.negativePrompt;
@@ -400,6 +428,29 @@
 
     setUrlState(id);
     if (!els.dialog.open) els.dialog.showModal();
+  }
+
+  function track(event, item, surface) {
+    if (item && !item.localOnly) window.PromptCinemaEvents?.track(event, item.id, surface);
+  }
+
+  function isCatalogPro(item) {
+    return item.access === 'pro' && !item.localOnly && state.baseLibrary.some(record => record.id === item.id && record.access === 'pro');
+  }
+
+  function openProContact(id, surface) {
+    const item = state.library.find(record => record.id === id);
+    if (!item || !isCatalogPro(item)) return;
+    const record = state.baseLibrary.find(entry => entry.id === id);
+    if (!els.dialog.open || state.currentId !== id) openDetail(id);
+    const link = `https://blankdigi.com/prompt-cinema/?video=${encodeURIComponent(record.id)}`;
+    const message = `Hello BlankDigi, I'd like to request access to the PRO recipe for ${record.id}.\n${link}\nPlease share availability and next steps.`;
+    els.proContactId.textContent = record.id;
+    els.proWhatsapp.href = `https://wa.me/212675683497?text=${encodeURIComponent(message)}`;
+    els.proEmail.href = `mailto:support@blankdigi.com?subject=${encodeURIComponent(`Prompt Cinema PRO request: ${record.id}`)}&body=${encodeURIComponent(message)}`;
+    els.proContact.hidden = false;
+    track('pro_unlock_click', item, surface);
+    els.proWhatsapp.focus();
   }
 
   function closeDetail() {
@@ -511,12 +562,19 @@
       textarea.value = text;
       textarea.style.position = 'fixed';
       textarea.style.opacity = '0';
-      document.body.appendChild(textarea);
+      // A native dialog makes body siblings inert; keep the fallback inside it.
+      (els.dialog.open ? els.dialog : document.body).appendChild(textarea);
       textarea.select();
-      document.execCommand('copy');
-      textarea.remove();
+      let copied = false;
+      try { copied = document.execCommand('copy'); } catch { /* Show the failure below. */ }
+      finally { textarea.remove(); }
+      if (!copied) {
+        showToast('Copy unavailable. Please select and copy the text.');
+        return false;
+      }
     }
     showToast(successMessage);
+    return true;
   }
 
   let toastTimer;
