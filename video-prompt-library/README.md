@@ -140,9 +140,12 @@ detail link. The visitor chooses whether to send; no form is submitted, payment
 is taken or recipe unlocked. Local imports cannot create requests or events.
 
 `events.js` emits into the in-memory `window.dataLayer` queue and dispatches a
-`prompt-cinema:event` browser CustomEvent. No GA4/GTM script, collector, cookies,
-storage or analytics network requests are added. Central reporting is not
-configured. A future consumer must apply the site's consent requirements.
+`prompt-cinema:event` browser CustomEvent. `index.html` loads the existing
+`GTM-MBWLFCR2` container using the standard head script and body noscript iframe.
+`events.js` itself adds no collector, cookies, storage or network requests.
+Google Tag and GA4 event delivery depend on the container's published configuration;
+installing the container does not establish that those tags fire. Analytics
+consumers must apply the site's consent requirements.
 
 Payload keys are limited to `event`, `record_id`, `access` and `surface`
 (`card` or `detail`). Prompts, query strings, titles, contact data and user IDs
