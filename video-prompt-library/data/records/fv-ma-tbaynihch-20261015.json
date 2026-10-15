@@ -1,0 +1,23 @@
+{
+  "id": "fv-ma-tbaynihch-20261015",
+  "title": "MA TBAYNIHCH",
+  "project": "FolloVida",
+  "category": "Comedy / Retail",
+  "model": "Unspecified",
+  "duration": "10s",
+  "ratio": "9:16",
+  "language": "Moroccan Darija",
+  "createdAt": "2026-10-15",
+  "status": "internal",
+  "access": "pro",
+  "featured": true,
+  "promptVersion": "PRO · FV-REAL-20261015-02",
+  "source": "user-upload",
+  "referenceCount": 1,
+  "promptAccess": "redacted",
+  "tags": ["PRO", "FolloVida", "deadpan", "retail", "dialogue"],
+  "video": "/media/prompt-cinema/fv-ma-tbaynihch-20261015/preview.mp4",
+  "publicSummary": "PRO recipe. A customer asks for an exclusive look; the request is reframed through deadpan retail logic and ends on a popularity contradiction. Full dialogue, beat timing, reference instructions, negative prompt and production JSON are private.",
+  "logic": "Unique-outfit request → warning not to post → popularity punchline",
+  "notes": "PRO/private production recipe. Exact prompt is not committed to the public repository. Original master + prompt are archived privately in Google Drive."
+}

@@ -1,0 +1,23 @@
+{
+  "id": "fv-ghir-ana-20261015",
+  "title": "GHIR ANA",
+  "project": "FolloVida",
+  "category": "Comedy / Timing Logic",
+  "model": "Unspecified",
+  "duration": "10s",
+  "ratio": "9:16",
+  "language": "Moroccan Darija",
+  "createdAt": "2026-10-15",
+  "status": "internal",
+  "access": "pro",
+  "featured": false,
+  "promptVersion": "PRO · FV-REAL-20261015-05",
+  "source": "user-upload",
+  "referenceCount": 0,
+  "promptAccess": "redacted",
+  "tags": ["PRO", "FolloVida", "deadpan", "timing", "punchline"],
+  "video": "/media/prompt-cinema/fv-ghir-ana-20261015/preview.mp4",
+  "publicSummary": "PRO recipe. An exclusivity promise is immediately contradicted by reality, then rescued with a deadpan semantic loophole. Full dialogue, timing design, staging rules and production prompt remain private.",
+  "logic": "Exclusive-outfit promise → contradiction enters → semantic loophole punchline",
+  "notes": "PRO/private production recipe. Exact prompt is not committed to the public repository. Original master + prompt are archived privately in Google Drive."
+}

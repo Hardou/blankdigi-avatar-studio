@@ -1,0 +1,31 @@
+{
+  "schemaVersion": "1.0.0",
+  "sourceOfTruth": "google-drive",
+  "masterStorage": "google-drive",
+  "publicRepoStoresMasters": false,
+  "chief": {
+    "hostPersistentRoot": "/opt/infra/suitev1/media/prompt-cinema",
+    "containerMount": "/app/media/prompt-cinema",
+    "workingCopyPolicy": "preview-and-cache-only",
+    "ephemeralContainerFilesystemAllowed": false
+  },
+  "previewProfile": {
+    "filename": "preview.mp4",
+    "videoCodec": "libx264",
+    "pixelFormat": "yuv420p",
+    "maxWidth": 540,
+    "maxHeight": 960,
+    "fps": 24,
+    "crf": 28,
+    "preset": "veryfast",
+    "audio": "aac-96k-or-none",
+    "fastStart": true
+  },
+  "rules": [
+    "Keep full-resolution masters in Google Drive.",
+    "Generate lightweight browser previews into the persistent host volume.",
+    "Never rely on a container writable layer for durable media.",
+    "GitHub stores code and catalog metadata, not full master video files.",
+    "Prompt Cinema should reference an HTTP media endpoint backed by the persistent volume or a future object-storage CDN."
+  ]
+}

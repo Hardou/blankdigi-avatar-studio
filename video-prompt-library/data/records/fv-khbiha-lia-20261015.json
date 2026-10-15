@@ -1,0 +1,23 @@
+{
+  "id": "fv-khbiha-lia-20261015",
+  "title": "KHBIHA LIA",
+  "project": "FolloVida",
+  "category": "Comedy / Literal Logic",
+  "model": "Unspecified",
+  "duration": "10s",
+  "ratio": "9:16",
+  "language": "Moroccan Darija",
+  "createdAt": "2026-10-15",
+  "status": "internal",
+  "access": "pro",
+  "featured": true,
+  "promptVersion": "PRO · FV-REAL-20261015-04",
+  "source": "user-upload",
+  "referenceCount": 1,
+  "promptAccess": "redacted",
+  "tags": ["PRO", "FolloVida", "literal-logic", "spy", "escalation"],
+  "video": "/media/prompt-cinema/fv-khbiha-lia-20261015/preview.mp4",
+  "publicSummary": "PRO recipe. A normal customer request is interpreted literally, then escalates into a serious spy-mission visual world while the shopkeeper stays deadpan. Full dialogue, exact beat map, camera instructions, references and production negatives are private.",
+  "logic": "Normal request → literal interpretation → spy-mission escalation → dry punchline",
+  "notes": "PRO/private production recipe. Exact prompt is not committed to the public repository. Original master + prompt are archived privately in Google Drive."
+}

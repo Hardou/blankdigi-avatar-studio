@@ -1,0 +1,29 @@
+{
+  "schemaVersion": "1.0.0",
+  "library": [
+    {
+      "id": "local-example-001",
+      "title": "Local Internal Test",
+      "project": "FolloVida",
+      "category": "Comedy / Retail",
+      "model": "Seedance 2.0",
+      "duration": "10s",
+      "ratio": "9:16",
+      "language": "Darija",
+      "createdAt": "2026-10-15",
+      "status": "experiment",
+      "featured": false,
+      "score": 85,
+      "promptVersion": "LOCAL-01",
+      "source": "manual",
+      "referenceCount": 2,
+      "promptAccess": "public",
+      "tags": ["local", "test"],
+      "video": "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+      "prompt": "Paste the exact internal production prompt here. Imported records stay in this browser session and are not written back to GitHub.",
+      "negativePrompt": "Optional negative prompt.",
+      "logic": "Hook → escalation → punchline",
+      "notes": "Local import example."
+    }
+  ]
+}
