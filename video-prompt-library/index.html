@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#05040A" />
+  <title>BlankDigi Prompt Cinema</title>
+  <meta name="description" content="BlankDigi Prompt Cinema: free starter recipes and private Pro production recipes paired with real AI video results." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="page-shell">
+    <header class="topbar">
+      <a class="brand" href="../ai-content-avatar/" aria-label="Back to BlankDigi Avatar Studio">
+        <span class="brand-mark">BD</span>
+        <span><strong>BlankDigi</strong><small>Prompt Cinema</small></span>
+      </a>
+      <div class="topbar-actions">
+        <span class="status-pill"><span class="status-dot"></span>MVP v0.3 · Free / Pro</span>
+        <button class="ghost-button" id="importButton" type="button">Import private JSON</button>
+        <button class="ghost-button" id="exportButton" type="button">Export view</button>
+        <a class="ghost-link" href="../ai-content-avatar/">Avatar Studio ↗</a>
+        <input id="importInput" type="file" accept="application/json,.json" hidden />
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="eyebrow">VIDEO + PROMPT INTELLIGENCE</div>
+        <h1>Watch the result.<br><span>Learn free.</span> Unlock the production recipe.</h1>
+        <p>
+          Prompt Cinema keeps real AI video results and their creative logic together. Free records include a public-safe starter prompt. Pro records expose the result and mechanism while the exact production JSON, reference locks and negative prompts remain private.
+        </p>
+        <div class="hero-stats" aria-label="Library summary">
+          <div><strong id="statTotal">0</strong><span>videos</span></div>
+          <div><strong id="statModels">0</strong><span>models</span></div>
+          <div><strong id="statProjects">0</strong><span>projects</span></div>
+          <div><strong id="statApproved">0</strong><span>free recipes</span></div>
+        </div>
+      </section>
+
+      <section class="safety-strip" aria-label="Public build guardrail">
+        <div>
+          <strong>Free / Pro guardrail</strong>
+          <span>Free prompts are newly written starter recipes. Exact production prompts never belong in the public GitHub build; Pro records contain only safe summaries.</span>
+        </div>
+        <div id="localImportStatus" class="local-status" hidden></div>
+      </section>
+
+      <section class="toolbar" aria-label="Prompt library filters">
+        <label class="search-box">
+          <span>⌕</span>
+          <input id="searchInput" type="search" placeholder="Search title, recipe, tag, model, project…" autocomplete="off" />
+        </label>
+        <select id="projectFilter" aria-label="Filter by project"><option value="all">All projects</option></select>
+        <select id="modelFilter" aria-label="Filter by model"><option value="all">All models</option></select>
+        <select id="categoryFilter" aria-label="Filter by category"><option value="all">All categories</option></select>
+        <select id="statusFilter" aria-label="Filter by access/status"><option value="all">All access</option></select>
+        <select id="sortFilter" aria-label="Sort library">
+          <option value="featured">Featured first</option>
+          <option value="score">Highest score</option>
+          <option value="newest">Newest</option>
+          <option value="title">A–Z</option>
+        </select>
+      </section>
+
+      <section class="library-section">
+        <div class="section-head">
+          <div><div class="eyebrow">LIBRARY</div><h2>Free starters + Pro creative systems</h2></div>
+          <div class="result-count" id="resultCount">0 results</div>
+        </div>
+        <div class="video-grid" id="videoGrid" aria-live="polite"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <strong>No match.</strong><span>Try another keyword, project, model or category.</span>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>BlankDigi Prompt Cinema · Free / Pro creative memory</span>
+      <span>Public-safe catalog · private production recipes stay off GitHub</span>
+    </footer>
+  </div>
+
+  <dialog id="detailDialog" class="detail-dialog">
+    <button class="dialog-close" id="dialogClose" aria-label="Close details">×</button>
+    <div class="detail-layout">
+      <div class="detail-video-wrap">
+        <video id="detailVideo" controls muted loop playsinline preload="metadata"></video>
+        <div id="detailVideoFallback" class="video-fallback" hidden>Video preview unavailable</div>
+      </div>
+      <div class="detail-copy">
+        <div class="detail-kicker"><span class="eyebrow" id="detailCategory"></span><span id="detailStatus" class="status-chip"></span></div>
+        <h3 id="detailTitle"></h3>
+        <div class="detail-meta" id="detailMeta"></div>
+
+        <div class="logic-block" id="logicBlock" hidden>
+          <span>Creative engine</span>
+          <strong id="detailLogic"></strong>
+        </div>
+
+        <div class="prompt-block">
+          <div class="prompt-block-head">
+            <span>Recipe</span>
+            <div class="prompt-actions">
+              <button class="copy-button" id="copyDetailPrompt">Copy free starter</button>
+              <button class="copy-button subtle" id="copyDetailJson">Copy public JSON</button>
+            </div>
+          </div>
+          <pre id="detailPrompt"></pre>
+          <div id="redactedNotice" class="redacted-notice" hidden>
+            PRO recipe locked. The exact production prompt, beat map, references and negative-prompt package are stored privately and are not shipped in this public page.
+          </div>
+        </div>
+
+        <div class="prompt-block secondary" id="negativePromptBlock">
+          <div class="prompt-block-head"><span>Negative prompt</span></div>
+          <pre id="detailNegativePrompt"></pre>
+        </div>
+
+        <div class="notes-block" id="detailNotes"></div>
+        <div class="tag-list" id="detailTags"></div>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+  <script src="./manifest-preload.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

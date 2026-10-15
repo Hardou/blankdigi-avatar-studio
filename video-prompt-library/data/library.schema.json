@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://blankdigi.com/schemas/prompt-cinema-library.schema.json",
+  "title": "BlankDigi Prompt Cinema Library",
+  "type": "object",
+  "required": ["schemaVersion"],
+  "oneOf": [
+    { "required": ["library"] },
+    { "required": ["recordFiles"] }
+  ],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "generatedAt": { "type": "string" },
+    "recordFiles": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+    "library": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "project", "category", "model", "createdAt", "access", "promptAccess", "video"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "title": { "type": "string", "minLength": 1 },
+          "project": { "type": "string", "minLength": 1 },
+          "category": { "type": "string", "minLength": 1 },
+          "model": { "type": "string", "minLength": 1 },
+          "duration": { "type": "string" },
+          "ratio": { "type": "string" },
+          "language": { "type": "string" },
+          "createdAt": { "type": "string" },
+          "status": { "type": "string" },
+          "access": { "enum": ["free", "pro"] },
+          "featured": { "type": "boolean" },
+          "score": { "type": "number", "minimum": 0, "maximum": 100 },
+          "promptVersion": { "type": "string" },
+          "source": { "type": "string" },
+          "referenceCount": { "type": "integer", "minimum": 0 },
+          "promptAccess": { "enum": ["public", "redacted"] },
+          "tags": { "type": "array", "items": { "type": "string" } },
+          "video": { "type": "string", "minLength": 1 },
+          "poster": { "type": "string" },
+          "prompt": { "type": "string" },
+          "publicSummary": { "type": "string" },
+          "negativePrompt": { "type": "string" },
+          "logic": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
