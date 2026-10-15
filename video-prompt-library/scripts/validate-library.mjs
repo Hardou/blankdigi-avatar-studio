@@ -83,8 +83,9 @@ if (!Array.isArray(records)) {
 
     const video = String(item.video || '');
     const safeRelativeMedia = video.startsWith('./media/');
-    if (video && !safeRelativeMedia && !video.startsWith('https://') && !video.startsWith('data:video/mp4;base64,')) {
-      errors.push(`${label}: video must use HTTPS, ./media/, or an embedded MP4 data URI.`);
+    const safeCanonicalMedia = video === `/media/prompt-cinema/${item.id}/preview.mp4`;
+    if (video && !safeCanonicalMedia && !safeRelativeMedia && !video.startsWith('https://') && !video.startsWith('data:video/mp4;base64,')) {
+      errors.push(`${label}: video must use its canonical /media/prompt-cinema/ ID path, HTTPS, ./media/, or an embedded MP4 data URI.`);
     }
 
     const poster = String(item.poster || '');

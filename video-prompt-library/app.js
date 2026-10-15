@@ -63,7 +63,15 @@
 
   const unique = (values) => [...new Set(values.filter(Boolean))].sort((a, b) => a.localeCompare(b));
   const safeDate = (value) => Number.isNaN(Date.parse(value)) ? 0 : Date.parse(value);
-  const isPublicPrompt = (item) => item.promptAccess !== 'redacted' && typeof item.prompt === 'string' && item.prompt.trim().length > 0;
+  const isPublicPrompt = (item) => item.access === 'free' && item.promptAccess !== 'redacted' && typeof item.prompt === 'string' && item.prompt.trim().length > 0;
+
+  const publicRecord = (item) => {
+    const clean = { ...item };
+    delete clean.localOnly;
+    delete clean.negativePrompt;
+    if (clean.access === 'pro' || clean.promptAccess === 'redacted') delete clean.prompt;
+    return clean;
+  };
 
   async function boot() {
     bindEvents();
@@ -95,7 +103,8 @@
 
   function normalizeRecord(item) {
     if (!item || typeof item !== 'object' || !item.id || !item.title) return null;
-    const promptAccess = item.promptAccess === 'redacted' ? 'redacted' : 'public';
+    const access = item.access === 'pro' || item.promptAccess === 'redacted' ? 'pro' : 'free';
+    const promptAccess = access === 'pro' ? 'redacted' : 'public';
     return {
       id: String(item.id),
       title: String(item.title),
@@ -112,6 +121,7 @@
       promptVersion: item.promptVersion ? String(item.promptVersion) : '',
       source: item.source ? String(item.source) : 'manual',
       referenceCount: Number.isInteger(item.referenceCount) ? item.referenceCount : Number(item.referenceCount || 0),
+      access,
       promptAccess,
       tags: Array.isArray(item.tags) ? item.tags.map(String) : [],
       video: String(item.video || ''),
@@ -158,7 +168,7 @@
       [els.project, unique(state.library.map(item => item.project))],
       [els.model, unique(state.library.map(item => item.model))],
       [els.category, unique(state.library.map(item => item.category))],
-      [els.status, unique(state.library.map(item => item.status))]
+      [els.status, unique(state.library.map(item => item.access))]
     ];
 
     configs.forEach(([select, values]) => {
@@ -173,7 +183,7 @@
     els.statTotal.textContent = String(state.library.length);
     els.statModels.textContent = String(unique(state.library.map(item => item.model)).length);
     els.statProjects.textContent = String(unique(state.library.map(item => item.project)).length);
-    els.statApproved.textContent = String(state.library.filter(item => item.status === 'approved').length);
+    els.statApproved.textContent = String(state.library.filter(item => item.access === 'free').length);
   }
 
   function updateLocalStatus() {
@@ -263,8 +273,7 @@
     els.copyDetailJson.addEventListener('click', async () => {
       const item = state.library.find(entry => entry.id === state.currentId);
       if (!item) return;
-      const exportRecord = { ...item };
-      delete exportRecord.localOnly;
+      const exportRecord = publicRecord(item);
       await copyText(JSON.stringify(exportRecord, null, 2), 'Record JSON copied');
     });
 
@@ -284,7 +293,7 @@
       if (state.project !== 'all' && item.project !== state.project) return false;
       if (state.model !== 'all' && item.model !== state.model) return false;
       if (state.category !== 'all' && item.category !== state.category) return false;
-      if (state.status !== 'all' && item.status !== state.status) return false;
+      if (state.status !== 'all' && item.access !== state.status) return false;
       if (!query) return true;
 
       const haystack = [
@@ -316,7 +325,7 @@
     const tags = (item.tags || []).slice(0, 3).map(tag => `<span>#${esc(tag)}</span>`).join('');
     const promptCopy = isPublicPrompt(item)
       ? `<button class="secondary-btn" data-copy="${esc(item.id)}">Copy prompt</button>`
-      : `<button class="secondary-btn locked" disabled>Prompt redacted</button>`;
+      : `<button class="secondary-btn locked" disabled>PRO · Unlock Full Recipe</button>`;
     const snippet = isPublicPrompt(item) ? item.prompt : (item.publicSummary || 'Prompt omitted from the public catalog.');
     const score = item.score == null ? '' : `<span class="score-badge">${esc(item.score)} score</span>`;
     const local = item.localOnly ? `<span class="local-badge">LOCAL</span>` : '';
@@ -337,7 +346,7 @@
           </div>
         </div>
         <div class="card-body">
-          <div class="card-status-row"><span class="status-chip ${esc(item.status)}">${esc(item.status)}</span><span>${esc(item.promptVersion || item.source)}</span></div>
+          <div class="card-status-row"><span class="status-chip ${esc(item.access)}">${esc(item.access.toUpperCase())}</span><span>${esc(item.promptVersion || item.source)}</span></div>
           <p>${esc(snippet)}</p>
           <div class="tag-row">${tags}</div>
           <div class="card-actions">${promptCopy}<button class="text-btn" tabindex="-1">Details →</button></div>
@@ -352,8 +361,8 @@
 
     state.currentId = id;
     els.detailCategory.textContent = `${item.project} · ${item.category}`;
-    els.detailStatus.textContent = item.status;
-    els.detailStatus.className = `status-chip ${item.status}`;
+    els.detailStatus.textContent = item.access.toUpperCase();
+    els.detailStatus.className = `status-chip ${item.access}`;
     els.detailTitle.textContent = item.title;
     els.detailMeta.innerHTML = [
       item.model,
@@ -457,7 +466,7 @@
       ['project', item => item.project],
       ['model', item => item.model],
       ['category', item => item.category],
-      ['status', item => item.status]
+      ['status', item => item.access]
     ];
     checks.forEach(([key, getter]) => {
       if (state[key] === 'all') return;
@@ -467,9 +476,7 @@
 
   function exportVisibleRecords() {
     const items = getVisibleItems().map(item => {
-      const clean = { ...item };
-      delete clean.localOnly;
-      return clean;
+      return publicRecord(item);
     });
     const payload = {
       schemaVersion: '1.0.0',
