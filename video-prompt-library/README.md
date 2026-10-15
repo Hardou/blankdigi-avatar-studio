@@ -59,7 +59,21 @@ host:      /opt/infra/suitev1/media/prompt-cinema
 container: /app/media/prompt-cinema
 ```
 
-`ops/media-policy.json` documents the storage rule and `scripts/build-preview.sh` creates H.264 browser previews. Public records point at `./media/previews/<record-id>/preview.mp4` until the media service/CDN mapping is finalized.
+`ops/media-policy.json` documents the storage rule and `scripts/build-preview.sh` creates H.264 browser previews. Public records use `/media/prompt-cinema/<record-id>/preview.mp4`, served by the production host Nginx static layer. The backend does not require a media bind mount for this public-preview architecture.
+
+## Accepted MVP previews — 2026-10-15
+
+The five production previews supplied for this MVP are accepted as-is:
+
+- H.264, 360x640, 24 fps, yuv420p, MP4 faststart.
+- CRF 31 and no audio tracks.
+- Canonical public URL: /media/prompt-cinema/<record-id>/preview.mp4.
+
+CRF 31 differs from the target encoder setting of approximately CRF 28.
+The supplied previews are silent, unlike the audio-bearing preview target.
+These are accepted MVP input differences, not a change to the target profile.
+Do not re-encode these files for this deployment. Masters and exact prompts stay
+private in Google Drive; no masters or PRO recipe content belong in this build.
 
 ## Seed access split
 
